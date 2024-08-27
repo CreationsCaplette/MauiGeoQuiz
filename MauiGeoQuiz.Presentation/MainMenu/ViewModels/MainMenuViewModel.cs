@@ -3,7 +3,7 @@ using MauiGeoQuiz.Presentation.Services;
 using ReactiveUI;
 using System.Reactive;
 
-namespace MauiGeoQuiz.Presentation.MainMenu;
+namespace MauiGeoQuiz.Presentation.MainMenu.ViewModels;
 
 public class MainMenuViewModel : ReactiveObject, IActivatableViewModel
 {

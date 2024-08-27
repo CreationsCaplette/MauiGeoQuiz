@@ -68,7 +68,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="MainPage.xaml.cs">
+	  <Compile Update="MainMenu\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Resources\Strings\Strings.Designer.cs">
@@ -83,6 +83,12 @@
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Strings.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Game\GamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

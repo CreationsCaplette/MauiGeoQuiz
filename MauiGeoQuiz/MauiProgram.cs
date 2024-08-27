@@ -1,4 +1,9 @@
-﻿using MauiGeoQuiz.Presentation.MainMenu;
+﻿using MauiGeoQuiz.Domain.Game.Repositories;
+using MauiGeoQuiz.Domain.Game.UseCases;
+using MauiGeoQuiz.Game;
+using MauiGeoQuiz.MainMenu;
+using MauiGeoQuiz.Presentation.Game.ViewModels;
+using MauiGeoQuiz.Presentation.MainMenu.ViewModels;
 using MauiGeoQuiz.Presentation.Services;
 using MauiGeoQuiz.Services;
 using Microsoft.Extensions.Logging;
@@ -19,9 +24,11 @@ public static class MauiProgram
 
         SetupServices(builder);
         SetupPresentation(builder);
+        SetupDomain(builder);
+        SetupData(builder);
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         return builder.Build();
@@ -36,5 +43,20 @@ public static class MauiProgram
     {
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddScoped<MainMenuViewModel>();
+
+        builder.Services.AddTransient<GamePage>();
+        builder.Services.AddScoped<GameViewModel>();
+    }
+
+    private static void SetupDomain(MauiAppBuilder builder)
+    {
+        builder.Services.AddScoped<GetCapitalsGameUseCase>();
+    }
+
+    private static void SetupData(MauiAppBuilder builder)
+    {
+        builder.Services.AddTransient<HttpClient>();
+        //builder.Services.AddTransient<ICountriesDataSource, CountriesApiDataSource>();
+        //builder.Services.AddTransient<IUpdateDataRepository, UpdateDataRepository>();
     }
 }

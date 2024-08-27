@@ -1,8 +1,8 @@
-using MauiGeoQuiz.Presentation.MainMenu;
+using MauiGeoQuiz.Presentation.MainMenu.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Maui;
 
-namespace MauiGeoQuiz;
+namespace MauiGeoQuiz.MainMenu;
 
 public partial class MainPage : ReactiveContentPage<MainMenuViewModel>
 {
