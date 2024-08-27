@@ -1,24 +1,14 @@
-﻿namespace MauiGeoQuiz;
+using ReactiveUI;
+using ReactiveUI.Maui;
 
-public partial class MainPage : ContentPage
+namespace MauiGeoQuiz;
+
+public partial class MainPage : ReactiveContentPage<MainMenuViewModel>
 {
-    int count = 0;
-
-    public MainPage()
+	public MainPage(MainMenuViewModel viewModel)
     {
+        ViewModel = viewModel;
         InitializeComponent();
-    }
-
-    private void OnCounterClicked(object sender, EventArgs e)
-    {
-        count++;
-
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
+        this.WhenActivated(_ => { });
     }
 }
-
