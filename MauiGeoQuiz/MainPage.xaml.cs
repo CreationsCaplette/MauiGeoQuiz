@@ -1,3 +1,4 @@
+using MauiGeoQuiz.Presentation.MainMenu;
 using ReactiveUI;
 using ReactiveUI.Maui;
 

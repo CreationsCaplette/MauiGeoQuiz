@@ -1,9 +1,9 @@
-﻿using MauiGeoQuiz.Constants;
-using MauiGeoQuiz.Services;
+﻿using MauiGeoQuiz.Presentation.Constants;
+using MauiGeoQuiz.Presentation.Services;
 using ReactiveUI;
 using System.Reactive;
 
-namespace MauiGeoQuiz;
+namespace MauiGeoQuiz.Presentation.MainMenu;
 
 public class MainMenuViewModel : ReactiveObject, IActivatableViewModel
 {

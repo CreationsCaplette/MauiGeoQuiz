@@ -1,4 +1,4 @@
-﻿namespace MauiGeoQuiz.Services;
+﻿namespace MauiGeoQuiz.Presentation.Services;
 
 public interface INavigationService
 {

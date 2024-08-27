@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maui="clr-namespace:ReactiveUI.Maui;assembly=ReactiveUI.Maui"
-    xmlns:vm="clr-namespace:MauiGeoQuiz;assembly=MauiGeoQuiz"
+    xmlns:vm="clr-namespace:MauiGeoQuiz.Presentation.MainMenu;assembly=MauiGeoQuiz.Presentation"
     xmlns:strings="clr-namespace:MauiGeoQuiz.Resources.Strings"
     x:TypeArguments="vm:MainMenuViewModel"
     x:DataType="vm:MainMenuViewModel"

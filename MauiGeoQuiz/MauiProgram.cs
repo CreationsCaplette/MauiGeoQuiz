@@ -1,4 +1,6 @@
-﻿using MauiGeoQuiz.Services;
+﻿using MauiGeoQuiz.Presentation.MainMenu;
+using MauiGeoQuiz.Presentation.Services;
+using MauiGeoQuiz.Services;
 using Microsoft.Extensions.Logging;
 
 namespace MauiGeoQuiz;
