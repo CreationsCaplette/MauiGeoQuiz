@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz", "MauiGeoQuiz\MauiGeoQuiz.csproj", "{CDE6521C-652F-4DD7-A573-E5F0C18D571C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiGeoQuiz", "MauiGeoQuiz\MauiGeoQuiz.csproj", "{CDE6521C-652F-4DD7-A573-E5F0C18D571C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.Presentation", "MauiGeoQuiz.Presentation\MauiGeoQuiz.Presentation.csproj", "{D89A76D7-A149-4686-8AED-4C263609D6B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.Data", "MauiGeoQuiz.Data\MauiGeoQuiz.Data.csproj", "{AF70006D-B66E-4503-9C1F-13101F946E86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.Domain", "MauiGeoQuiz.Domain\MauiGeoQuiz.Domain.csproj", "{EE94B66D-0518-47ED-830A-B11D5FF966E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +23,18 @@ Global
 		{CDE6521C-652F-4DD7-A573-E5F0C18D571C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDE6521C-652F-4DD7-A573-E5F0C18D571C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CDE6521C-652F-4DD7-A573-E5F0C18D571C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D89A76D7-A149-4686-8AED-4C263609D6B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89A76D7-A149-4686-8AED-4C263609D6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89A76D7-A149-4686-8AED-4C263609D6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89A76D7-A149-4686-8AED-4C263609D6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF70006D-B66E-4503-9C1F-13101F946E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF70006D-B66E-4503-9C1F-13101F946E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF70006D-B66E-4503-9C1F-13101F946E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF70006D-B66E-4503-9C1F-13101F946E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE94B66D-0518-47ED-830A-B11D5FF966E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE94B66D-0518-47ED-830A-B11D5FF966E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE94B66D-0518-47ED-830A-B11D5FF966E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE94B66D-0518-47ED-830A-B11D5FF966E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

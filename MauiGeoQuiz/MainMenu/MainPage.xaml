@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<maui:ReactiveContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maui="clr-namespace:ReactiveUI.Maui;assembly=ReactiveUI.Maui"
+    xmlns:vm="clr-namespace:MauiGeoQuiz.Presentation.MainMenu.ViewModels;assembly=MauiGeoQuiz.Presentation"
+    xmlns:strings="clr-namespace:MauiGeoQuiz.Resources.Strings"
+    x:TypeArguments="vm:MainMenuViewModel"
+    x:DataType="vm:MainMenuViewModel"
+    x:Class="MauiGeoQuiz.MainMenu.MainPage">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Style="{StaticResource MenuStackLayout}">
+
+            <Label
+                Style="{StaticResource TitleLabel}"
+                Text="{x:Static strings:Strings.AppName}" />
+
+            <Image
+                Source="globe.png"
+                SemanticProperties.Description="Globe image"
+                HeightRequest="64"
+                HorizontalOptions="Center" />
+
+            <Button
+                Style="{StaticResource MenuButton}"
+                Text="{x:Static strings:Strings.CapitalsGame}"
+                Command="{Binding CapitalsCommand}"/>
+
+            <Button
+                Style="{StaticResource TextButton}"
+                Text="{x:Static strings:Strings.AboutApp}"
+                Command="{Binding AboutCommand}"
+                Margin="0,32,0,0"/>
+
+            <Button
+                Style="{StaticResource TextButton}"
+                Text="{x:Static strings:Strings.PrivacyPolicy}"
+                Command="{Binding PrivacyCommand}"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</maui:ReactiveContentPage>
