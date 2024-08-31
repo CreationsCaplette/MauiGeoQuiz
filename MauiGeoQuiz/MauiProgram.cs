@@ -1,4 +1,6 @@
-﻿using MauiGeoQuiz.Domain.Game.Repositories;
+﻿using MauiGeoQuiz.Data.Game.Datasources;
+using MauiGeoQuiz.Data.Game.Repositories;
+using MauiGeoQuiz.Domain.Game.Repositories;
 using MauiGeoQuiz.Domain.Game.UseCases;
 using MauiGeoQuiz.Game;
 using MauiGeoQuiz.MainMenu;
@@ -56,7 +58,7 @@ public static class MauiProgram
     private static void SetupData(MauiAppBuilder builder)
     {
         builder.Services.AddTransient<HttpClient>();
-        //builder.Services.AddTransient<ICountriesDataSource, CountriesApiDataSource>();
-        //builder.Services.AddTransient<IUpdateDataRepository, UpdateDataRepository>();
+        builder.Services.AddTransient<ICountriesDataSource, CountriesApiDataSource>();
+        builder.Services.AddTransient<IUpdateDataRepository, UpdateDataRepository>();
     }
 }

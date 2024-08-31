@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Game\" />
+	  <ProjectReference Include="..\MauiGeoQuiz.Domain\MauiGeoQuiz.Domain.csproj" />
 	</ItemGroup>
 
 </Project>
