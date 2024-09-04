@@ -1,4 +1,5 @@
-﻿using MauiGeoQuiz.Game;
+﻿using MauiGeoQuiz.About;
+using MauiGeoQuiz.Game;
 using MauiGeoQuiz.MainMenu;
 using MauiGeoQuiz.Presentation.Constants;
 
@@ -11,6 +12,7 @@ public partial class AppShell : Shell
         InitializeComponent();
 
         Routing.RegisterRoute(Pages.MainMenu, typeof(MainPage));
+        Routing.RegisterRoute(Pages.About, typeof(AboutPage));
         Routing.RegisterRoute(Pages.Game, typeof(GamePage));
     }
 }
