@@ -59,17 +59,17 @@
 
             <Button
                 Style="{StaticResource GameButton}"
-                Text="Answer 2"
+                Text="{Binding AnswerTwo}"
                 Command="{Binding AnswerTwoCommand}"/>
 
             <Button
                 Style="{StaticResource GameButton}"
-                Text="Answer 3"
+                Text="{Binding AnswerThree}"
                 Command="{Binding AnswerThreeCommand}"/>
 
             <Button
                 Style="{StaticResource GameButton}"
-                Text="Answer 4"
+                Text="{Binding AnswerFour}"
                 Command="{Binding AnswerFourCommand}"/>
 
             <Button
