@@ -1,8 +1,8 @@
-using MauiGeoQuiz.Presentation.About;
+using MauiGeoQuiz.About.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Maui;
 
-namespace MauiGeoQuiz.About;
+namespace MauiGeoQuiz.ViewPages;
 
 public partial class AboutPage : ReactiveContentPage<AboutViewModel>
 {

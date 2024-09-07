@@ -1,4 +1,4 @@
-﻿using MauiGeoQuiz.Presentation.Constants;
+﻿using MauiGeoQuiz.Core.Constants;
 using MauiGeoQuiz.Presentation.Services;
 using ReactiveUI;
 using System.Reactive;

@@ -27,7 +27,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\MauiGeoQuiz.Core\MauiGeoQuiz.Core.csproj" />
-	  <ProjectReference Include="..\MauiGeoQuiz.Domain\MauiGeoQuiz.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

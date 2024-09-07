@@ -1,16 +1,16 @@
-﻿using MauiGeoQuiz.About;
+﻿using MauiGeoQuiz.About.UseCases;
+using MauiGeoQuiz.About.ViewModels;
 using MauiGeoQuiz.Data.Game.Datasources;
 using MauiGeoQuiz.Data.Game.Repositories;
-using MauiGeoQuiz.Domain.About.UseCases;
 using MauiGeoQuiz.Domain.Game.Repositories;
 using MauiGeoQuiz.Domain.Game.UseCases;
 using MauiGeoQuiz.Game;
 using MauiGeoQuiz.MainMenu;
-using MauiGeoQuiz.Presentation.About;
 using MauiGeoQuiz.Presentation.Game.ViewModels;
 using MauiGeoQuiz.Presentation.MainMenu.ViewModels;
 using MauiGeoQuiz.Presentation.Services;
 using MauiGeoQuiz.Services;
+using MauiGeoQuiz.ViewPages;
 using Microsoft.Extensions.Logging;
 
 namespace MauiGeoQuiz;

@@ -1,6 +1,6 @@
 ﻿using MauiGeoQuiz.Domain.Architecture;
 
-namespace MauiGeoQuiz.Domain.About.UseCases;
+namespace MauiGeoQuiz.About.UseCases;
 public class GetVersionUseCase : ISyncUseCase<string>
 {
     public string Execute()

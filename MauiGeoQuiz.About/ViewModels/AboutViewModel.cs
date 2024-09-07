@@ -1,11 +1,11 @@
-﻿using MauiGeoQuiz.Domain.About.Models;
-using MauiGeoQuiz.Domain.About.UseCases;
+﻿using MauiGeoQuiz.About.Models;
+using MauiGeoQuiz.About.UseCases;
 using MauiGeoQuiz.Presentation.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Reactive;
 
-namespace MauiGeoQuiz.Presentation.About;
+namespace MauiGeoQuiz.About.ViewModels;
 public class AboutViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly IStringService _stringService;

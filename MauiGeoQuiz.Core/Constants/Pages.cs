@@ -1,4 +1,4 @@
-﻿namespace MauiGeoQuiz.Presentation.Constants;
+﻿namespace MauiGeoQuiz.Core.Constants;
 
 public static class Pages
 {

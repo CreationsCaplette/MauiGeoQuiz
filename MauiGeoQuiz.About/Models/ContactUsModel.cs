@@ -1,4 +1,4 @@
-﻿namespace MauiGeoQuiz.Domain.About.Models;
+﻿namespace MauiGeoQuiz.About.Models;
 public class ContactUsModel
 {
     public string AppName { get; set; } = string.Empty;

@@ -1,7 +1,7 @@
-﻿using MauiGeoQuiz.Domain.About.Models;
+﻿using MauiGeoQuiz.About.Models;
 using MauiGeoQuiz.Domain.Architecture;
 
-namespace MauiGeoQuiz.Domain.About.UseCases;
+namespace MauiGeoQuiz.About.UseCases;
 public class ContactUsUseCase : ICommandUseCase<ContactUsModel>
 {
     public async Task Execute(ContactUsModel request)

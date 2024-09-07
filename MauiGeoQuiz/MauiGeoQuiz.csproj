@@ -64,6 +64,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\MauiGeoQuiz.About\MauiGeoQuiz.About.csproj" />
+	  <ProjectReference Include="..\MauiGeoQuiz.Core\MauiGeoQuiz.Core.csproj" />
 	  <ProjectReference Include="..\MauiGeoQuiz.Data\MauiGeoQuiz.Data.csproj" />
 	  <ProjectReference Include="..\MauiGeoQuiz.Domain\MauiGeoQuiz.Domain.csproj" />
 	  <ProjectReference Include="..\MauiGeoQuiz.Presentation\MauiGeoQuiz.Presentation.csproj" />
@@ -72,6 +74,9 @@
 	<ItemGroup>
 	  <Compile Update="MainMenu\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ViewPages\AboutPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Resources\Strings\Strings.Designer.cs">
 	    <DesignTime>True</DesignTime>
@@ -88,10 +93,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="About\AboutPage.xaml">
+	  <MauiXaml Update="Game\GamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Game\GamePage.xaml">
+	  <MauiXaml Update="ViewPages\AboutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
