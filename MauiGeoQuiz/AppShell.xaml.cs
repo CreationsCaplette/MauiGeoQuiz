@@ -1,6 +1,4 @@
 ﻿using MauiGeoQuiz.Core.Constants;
-using MauiGeoQuiz.Game;
-using MauiGeoQuiz.MainMenu;
 using MauiGeoQuiz.ViewPages;
 
 namespace MauiGeoQuiz;

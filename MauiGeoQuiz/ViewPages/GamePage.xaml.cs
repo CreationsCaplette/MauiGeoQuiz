@@ -2,7 +2,7 @@ using MauiGeoQuiz.Presentation.Game.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Maui;
 
-namespace MauiGeoQuiz.Game;
+namespace MauiGeoQuiz.ViewPages;
 
 public partial class GamePage : ReactiveContentPage<GameViewModel>
 {

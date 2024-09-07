@@ -72,7 +72,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="MainMenu\MainPage.xaml.cs">
+	  <Compile Update="ViewPages\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="ViewPages\AboutPage.xaml.cs">
@@ -93,7 +93,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Game\GamePage.xaml">
+	  <MauiXaml Update="ViewPages\GamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="ViewPages\AboutPage.xaml">

@@ -4,8 +4,6 @@ using MauiGeoQuiz.Data.Game.Datasources;
 using MauiGeoQuiz.Data.Game.Repositories;
 using MauiGeoQuiz.Domain.Game.Repositories;
 using MauiGeoQuiz.Domain.Game.UseCases;
-using MauiGeoQuiz.Game;
-using MauiGeoQuiz.MainMenu;
 using MauiGeoQuiz.Presentation.Game.ViewModels;
 using MauiGeoQuiz.Presentation.MainMenu.ViewModels;
 using MauiGeoQuiz.Presentation.Services;

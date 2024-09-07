@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.About", "MauiGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.Core", "MauiGeoQuiz.Core\MauiGeoQuiz.Core.csproj", "{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.MainMenu", "MauiGeoQuiz.MainMenu\MauiGeoQuiz.MainMenu.csproj", "{262410C9-25C9-4E15-A95F-581621D82C7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.Game", "MauiGeoQuiz.Game\MauiGeoQuiz.Game.csproj", "{B5177164-A867-4199-8C8A-E6455D5027B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,14 @@ Global
 		{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{262410C9-25C9-4E15-A95F-581621D82C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{262410C9-25C9-4E15-A95F-581621D82C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{262410C9-25C9-4E15-A95F-581621D82C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{262410C9-25C9-4E15-A95F-581621D82C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5177164-A867-4199-8C8A-E6455D5027B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5177164-A867-4199-8C8A-E6455D5027B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5177164-A867-4199-8C8A-E6455D5027B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5177164-A867-4199-8C8A-E6455D5027B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

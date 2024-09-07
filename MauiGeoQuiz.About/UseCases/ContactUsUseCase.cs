@@ -13,7 +13,7 @@ public class ContactUsUseCase : ICommandUseCase<ContactUsModel>
                 Subject = $"{request.AppName} {request.AppVersion}",
                 Body = "",
                 BodyFormat = EmailBodyFormat.PlainText,
-                To = new List<string>() { request.EmailAddress }
+                To = [request.EmailAddress]
             };
 
             await Email.Default.ComposeAsync(message);

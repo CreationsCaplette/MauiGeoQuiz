@@ -7,7 +7,7 @@
     xmlns:strings="clr-namespace:MauiGeoQuiz.Resources.Strings"
     x:TypeArguments="vm:MainMenuViewModel"
     x:DataType="vm:MainMenuViewModel"
-    x:Class="MauiGeoQuiz.MainMenu.MainPage">
+    x:Class="MauiGeoQuiz.ViewPages.MainPage">
 
     <ScrollView>
 
