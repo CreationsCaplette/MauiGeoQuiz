@@ -23,4 +23,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\MauiGeoQuiz.Core\MauiGeoQuiz.Core.csproj" />
+	</ItemGroup>
+
 </Project>

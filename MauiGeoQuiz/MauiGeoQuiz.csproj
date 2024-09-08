@@ -56,22 +56,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.80" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
 		<PackageReference Include="ReactiveUI.Maui" Version="20.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\MauiGeoQuiz.Data\MauiGeoQuiz.Data.csproj" />
-	  <ProjectReference Include="..\MauiGeoQuiz.Domain\MauiGeoQuiz.Domain.csproj" />
-	  <ProjectReference Include="..\MauiGeoQuiz.Presentation\MauiGeoQuiz.Presentation.csproj" />
+	  <ProjectReference Include="..\MauiGeoQuiz.About\MauiGeoQuiz.About.csproj" />
+	  <ProjectReference Include="..\MauiGeoQuiz.Core\MauiGeoQuiz.Core.csproj" />
+	  <ProjectReference Include="..\MauiGeoQuiz.Game\MauiGeoQuiz.Game.csproj" />
+	  <ProjectReference Include="..\MauiGeoQuiz.MainMenu\MauiGeoQuiz.MainMenu.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="MainMenu\MainPage.xaml.cs">
+	  <Compile Update="ViewPages\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="ViewPages\AboutPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Resources\Strings\Strings.Designer.cs">
 	    <DesignTime>True</DesignTime>
@@ -88,10 +92,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="About\AboutPage.xaml">
+	  <MauiXaml Update="ViewPages\GamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Game\GamePage.xaml">
+	  <MauiXaml Update="ViewPages\AboutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

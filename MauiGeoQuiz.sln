@@ -5,11 +5,13 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiGeoQuiz", "MauiGeoQuiz\MauiGeoQuiz.csproj", "{CDE6521C-652F-4DD7-A573-E5F0C18D571C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.Presentation", "MauiGeoQuiz.Presentation\MauiGeoQuiz.Presentation.csproj", "{D89A76D7-A149-4686-8AED-4C263609D6B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiGeoQuiz.About", "MauiGeoQuiz.About\MauiGeoQuiz.About.csproj", "{E8152568-31FB-416D-A74C-D351C31A0A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.Data", "MauiGeoQuiz.Data\MauiGeoQuiz.Data.csproj", "{AF70006D-B66E-4503-9C1F-13101F946E86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiGeoQuiz.Core", "MauiGeoQuiz.Core\MauiGeoQuiz.Core.csproj", "{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGeoQuiz.Domain", "MauiGeoQuiz.Domain\MauiGeoQuiz.Domain.csproj", "{EE94B66D-0518-47ED-830A-B11D5FF966E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiGeoQuiz.MainMenu", "MauiGeoQuiz.MainMenu\MauiGeoQuiz.MainMenu.csproj", "{262410C9-25C9-4E15-A95F-581621D82C7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiGeoQuiz.Game", "MauiGeoQuiz.Game\MauiGeoQuiz.Game.csproj", "{B5177164-A867-4199-8C8A-E6455D5027B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,18 +25,22 @@ Global
 		{CDE6521C-652F-4DD7-A573-E5F0C18D571C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDE6521C-652F-4DD7-A573-E5F0C18D571C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CDE6521C-652F-4DD7-A573-E5F0C18D571C}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{D89A76D7-A149-4686-8AED-4C263609D6B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D89A76D7-A149-4686-8AED-4C263609D6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D89A76D7-A149-4686-8AED-4C263609D6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D89A76D7-A149-4686-8AED-4C263609D6B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF70006D-B66E-4503-9C1F-13101F946E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF70006D-B66E-4503-9C1F-13101F946E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF70006D-B66E-4503-9C1F-13101F946E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF70006D-B66E-4503-9C1F-13101F946E86}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE94B66D-0518-47ED-830A-B11D5FF966E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE94B66D-0518-47ED-830A-B11D5FF966E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE94B66D-0518-47ED-830A-B11D5FF966E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE94B66D-0518-47ED-830A-B11D5FF966E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8152568-31FB-416D-A74C-D351C31A0A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8152568-31FB-416D-A74C-D351C31A0A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8152568-31FB-416D-A74C-D351C31A0A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8152568-31FB-416D-A74C-D351C31A0A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C39C619B-50E7-41E1-A6BE-C3A06A48B8B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{262410C9-25C9-4E15-A95F-581621D82C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{262410C9-25C9-4E15-A95F-581621D82C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{262410C9-25C9-4E15-A95F-581621D82C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{262410C9-25C9-4E15-A95F-581621D82C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5177164-A867-4199-8C8A-E6455D5027B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5177164-A867-4199-8C8A-E6455D5027B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5177164-A867-4199-8C8A-E6455D5027B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5177164-A867-4199-8C8A-E6455D5027B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

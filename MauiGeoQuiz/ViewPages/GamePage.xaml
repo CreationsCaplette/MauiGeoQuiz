@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<maui:ReactiveContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maui="clr-namespace:ReactiveUI.Maui;assembly=ReactiveUI.Maui"
+    xmlns:vm="clr-namespace:MauiGeoQuiz.Game.ViewModels;assembly=MauiGeoQuiz.Game"
+    xmlns:strings="clr-namespace:MauiGeoQuiz.Resources.Strings"
+    x:TypeArguments="vm:GameViewModel"
+    x:DataType="vm:GameViewModel"
+    x:Class="MauiGeoQuiz.ViewPages.GamePage">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Style="{StaticResource MenuStackLayout}">
+
+            <Grid 
+                HorizontalOptions="Fill">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Style="{StaticResource InfoLabel}"
+                    Grid.Column="0"
+                    Text="24"
+                    HorizontalOptions="Start" />
+
+                <Label
+                    Style="{StaticResource InfoLabel}"
+                    Grid.Column="1"
+                    Text="{Binding QuizProgress}"
+                    HorizontalOptions="End" />
+
+            </Grid>
+
+            <Label
+                Style="{StaticResource TimerLabel}"
+                Text="0:27"
+                HorizontalOptions="Center" />
+
+            <Label
+                Style="{StaticResource QuestionLabel}"
+                Text="{Binding Question}"
+                HorizontalOptions="Center" />
+
+            <Image
+                Source="globe.png"
+                SemanticProperties.Description="Globe image"
+                HeightRequest="64"
+                HorizontalOptions="Center"
+                IsVisible="false"/>
+
+            <Button
+                Style="{StaticResource GameButton}"
+                Text="{Binding AnswerOne}"
+                Command="{Binding AnswerOneCommand}"/>
+
+            <Button
+                Style="{StaticResource GameButton}"
+                Text="{Binding AnswerTwo}"
+                Command="{Binding AnswerTwoCommand}"/>
+
+            <Button
+                Style="{StaticResource GameButton}"
+                Text="{Binding AnswerThree}"
+                Command="{Binding AnswerThreeCommand}"/>
+
+            <Button
+                Style="{StaticResource GameButton}"
+                Text="{Binding AnswerFour}"
+                Command="{Binding AnswerFourCommand}"/>
+
+            <Button
+                Style="{StaticResource TextButton}"
+                Text="{x:Static strings:Strings.NextQuestion}"
+                Command="{Binding NextQuestionCommand}"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</maui:ReactiveContentPage>
+    
