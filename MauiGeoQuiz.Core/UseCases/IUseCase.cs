@@ -1,4 +1,4 @@
-﻿namespace MauiGeoQuiz.Core.Architecture;
+﻿namespace MauiGeoQuiz.Core.UseCases;
 
 public interface IUseCase<RESULT>
 {

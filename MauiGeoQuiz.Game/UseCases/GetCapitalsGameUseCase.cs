@@ -1,4 +1,4 @@
-﻿using MauiGeoQuiz.Core.Architecture;
+﻿using MauiGeoQuiz.Core.UseCases;
 using MauiGeoQuiz.Game.Models;
 using MauiGeoQuiz.Game.Repositories;
 
