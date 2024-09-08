@@ -1,5 +1,5 @@
 ﻿using MauiGeoQuiz.About.Models;
-using MauiGeoQuiz.Domain.Architecture;
+using MauiGeoQuiz.Core.Architecture;
 
 namespace MauiGeoQuiz.About.UseCases;
 public class ContactUsUseCase : ICommandUseCase<ContactUsModel>

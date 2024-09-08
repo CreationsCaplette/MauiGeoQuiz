@@ -1,4 +1,4 @@
-using MauiGeoQuiz.Presentation.Game.ViewModels;
+using MauiGeoQuiz.Game.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Maui;
 

@@ -1,6 +1,6 @@
 ﻿using MauiGeoQuiz.About.Models;
 using MauiGeoQuiz.About.UseCases;
-using MauiGeoQuiz.Presentation.Services;
+using MauiGeoQuiz.Core.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Reactive;

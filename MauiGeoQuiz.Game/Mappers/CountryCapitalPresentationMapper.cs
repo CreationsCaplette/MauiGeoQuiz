@@ -1,7 +1,6 @@
-﻿using MauiGeoQuiz.Domain.Game.Models;
-using MauiGeoQuiz.Presentation.Game.Models;
+﻿using MauiGeoQuiz.Game.Models;
 
-namespace MauiGeoQuiz.Presentation.Game.Mappers;
+namespace MauiGeoQuiz.Game.Mappers;
 public static class CountryCapitalPresentationMapper
 {
     public static CountryCapitalPresentationModel ToCountryCapitalDomain(this CountryCapitalDomainModel countryDomainModel)

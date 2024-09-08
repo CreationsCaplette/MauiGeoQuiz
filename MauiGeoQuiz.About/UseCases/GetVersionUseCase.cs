@@ -1,4 +1,4 @@
-﻿using MauiGeoQuiz.Domain.Architecture;
+﻿using MauiGeoQuiz.Core.Architecture;
 
 namespace MauiGeoQuiz.About.UseCases;
 public class GetVersionUseCase : ISyncUseCase<string>

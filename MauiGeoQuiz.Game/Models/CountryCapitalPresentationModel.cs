@@ -1,2 +1,2 @@
-﻿namespace MauiGeoQuiz.Presentation.Game.Models;
+﻿namespace MauiGeoQuiz.Game.Models;
 public record CountryCapitalPresentationModel(string Name, string Capital);

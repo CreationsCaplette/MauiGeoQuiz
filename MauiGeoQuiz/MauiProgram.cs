@@ -1,12 +1,11 @@
 ﻿using MauiGeoQuiz.About.UseCases;
 using MauiGeoQuiz.About.ViewModels;
-using MauiGeoQuiz.Data.Game.Datasources;
-using MauiGeoQuiz.Data.Game.Repositories;
-using MauiGeoQuiz.Domain.Game.Repositories;
-using MauiGeoQuiz.Domain.Game.UseCases;
-using MauiGeoQuiz.Presentation.Game.ViewModels;
-using MauiGeoQuiz.Presentation.MainMenu.ViewModels;
-using MauiGeoQuiz.Presentation.Services;
+using MauiGeoQuiz.Core.Services;
+using MauiGeoQuiz.Game.Datasources;
+using MauiGeoQuiz.Game.Repositories;
+using MauiGeoQuiz.Game.UseCases;
+using MauiGeoQuiz.Game.ViewModels;
+using MauiGeoQuiz.MainMenu.ViewModels;
 using MauiGeoQuiz.Services;
 using MauiGeoQuiz.ViewPages;
 using Microsoft.Extensions.Logging;
@@ -65,7 +64,7 @@ public static class MauiProgram
     private static void SetupData(MauiAppBuilder builder)
     {
         builder.Services.AddTransient<HttpClient>();
-        builder.Services.AddTransient<ICountriesDataSource, CountriesApiDataSource>();
+        builder.Services.AddTransient<ICountriesDatasource, CountriesApiDatasource>();
         builder.Services.AddTransient<IUpdateDataRepository, UpdateDataRepository>();
     }
 }

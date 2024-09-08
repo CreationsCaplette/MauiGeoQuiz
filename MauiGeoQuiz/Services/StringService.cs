@@ -1,4 +1,4 @@
-﻿using MauiGeoQuiz.Presentation.Services;
+﻿using MauiGeoQuiz.Core.Services;
 
 namespace MauiGeoQuiz.Services;
 public class StringService : IStringService

@@ -1,12 +1,12 @@
-﻿using MauiGeoQuiz.Domain.Game.UseCases;
-using MauiGeoQuiz.Presentation.Game.Mappers;
-using MauiGeoQuiz.Presentation.Game.Models;
-using MauiGeoQuiz.Presentation.Services;
+﻿using MauiGeoQuiz.Game.UseCases;
+using MauiGeoQuiz.Game.Models;
+using MauiGeoQuiz.Core.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Reactive;
+using MauiGeoQuiz.Game.Mappers;
 
-namespace MauiGeoQuiz.Presentation.Game.ViewModels;
+namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
