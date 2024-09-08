@@ -7,7 +7,7 @@ public class CountryDataModel
     public CountryNamesDataModel Name { get; set; } = new CountryNamesDataModel();
 
     [JsonPropertyName("capital")]
-    public List<string> Capitals { get; set; } = new List<string>();
+    public List<string> Capitals { get; set; } = [];
 
     [JsonPropertyName("region")]
     public string Region { get; set; } = string.Empty;
