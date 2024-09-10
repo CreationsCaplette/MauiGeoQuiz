@@ -4,14 +4,13 @@ using MauiGeoQuiz.Core.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Reactive;
-using MauiGeoQuiz.Game.Mappers;
 
 namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
     private readonly GetCapitalsGameUseCase _getCapitalsGameUseCase;
-    private IEnumerable<CountryCapitalPresentationModel>? _countryCapitalsList;
+    private IEnumerable<CountryCapitalModel>? _countryCapitalsList;
     private int _questionIndex;
 
     [Reactive] public string? QuizProgress { get; set; }
@@ -44,7 +43,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     public async Task GetQuizData()
     {
         _questionIndex = -1;
-        _countryCapitalsList = (await _getCapitalsGameUseCase.Execute()).ToCountryCapitalDomainList();
+        _countryCapitalsList = await _getCapitalsGameUseCase.Execute();
 
         DisplayNextQuestion();
     }
