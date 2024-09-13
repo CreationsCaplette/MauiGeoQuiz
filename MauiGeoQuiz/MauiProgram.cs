@@ -65,6 +65,7 @@ public static class MauiProgram
     {
         builder.Services.AddTransient<HttpClient>();
         builder.Services.AddTransient<ICountriesRemoteDatasource, CountriesRemoteDatasource>();
+        builder.Services.AddTransient<ICountriesLocalDatasource, CountriesLocalDatasource>();
         builder.Services.AddTransient<IUpdateDataRepository, UpdateDataRepository>();
     }
 }
