@@ -12,6 +12,7 @@ public class UpdateDataRepository(ICountriesDatasource countriesDataSource) : IU
 {
     public async Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData()
     {
-        return (await countriesDataSource.FetchCountriesData()).ToCountryCapitalList();
+        var countriesList = await countriesDataSource.FetchCountriesData();
+        return countriesList.Where(c => c.Capitals.Count() > 0).ToCountryCapitalList();
     }
 }

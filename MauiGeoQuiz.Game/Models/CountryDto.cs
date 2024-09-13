@@ -7,7 +7,7 @@ public class CountryDto
     public CountryNamesDto Name { get; set; } = new CountryNamesDto();
 
     [JsonPropertyName("capital")]
-    public List<string> Capitals { get; set; } = [];
+    public IEnumerable<string> Capitals { get; set; } = [];
 
     [JsonPropertyName("region")]
     public string Region { get; set; } = string.Empty;
