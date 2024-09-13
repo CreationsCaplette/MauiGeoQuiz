@@ -3,12 +3,12 @@ using System.Diagnostics;
 using System.Text.Json;
 
 namespace MauiGeoQuiz.Game.Datasources;
-public interface ICountriesDatasource
+public interface ICountriesRemoteDatasource
 {
     Task<IEnumerable<CountryDto>> FetchCountriesData();
 }
 
-public class CountriesApiDatasource : ICountriesDatasource
+public class CountriesRemoteDatasource : ICountriesRemoteDatasource
 {
     private const string BaseUrl = "https://restcountries.com/";
     private const string Parameters = "v3.1/all?fields=name,capital,region,subregion,flags";
@@ -16,7 +16,7 @@ public class CountriesApiDatasource : ICountriesDatasource
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _serializerOptions;
 
-    public CountriesApiDatasource(HttpClient httpClient)
+    public CountriesRemoteDatasource(HttpClient httpClient)
     {
         _httpClient = httpClient;
         _serializerOptions = new JsonSerializerOptions

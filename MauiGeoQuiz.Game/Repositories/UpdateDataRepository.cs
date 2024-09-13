@@ -8,11 +8,11 @@ public interface IUpdateDataRepository
 {
     Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData();
 }
-public class UpdateDataRepository(ICountriesDatasource countriesDataSource) : IUpdateDataRepository
+public class UpdateDataRepository(ICountriesRemoteDatasource countriesRemoteDatasource) : IUpdateDataRepository
 {
     public async Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData()
     {
-        var countriesList = await countriesDataSource.FetchCountriesData();
+        var countriesList = await countriesRemoteDatasource.FetchCountriesData();
         return countriesList.Where(c => c.Capitals.Count() > 0).ToCountryCapitalList();
     }
 }
