@@ -4,14 +4,13 @@ using MauiGeoQuiz.Core.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Reactive;
-using MauiGeoQuiz.Game.Mappers;
 
 namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
     private readonly GetCapitalsGameUseCase _getCapitalsGameUseCase;
-    private IEnumerable<CountryCapitalPresentationModel>? _countryCapitalsList;
+    private IEnumerable<CountryCapitalQuestionModel>? _countryCapitalQuestions;
     private int _questionIndex;
 
     [Reactive] public string? QuizProgress { get; set; }
@@ -44,7 +43,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     public async Task GetQuizData()
     {
         _questionIndex = -1;
-        _countryCapitalsList = (await _getCapitalsGameUseCase.Execute()).ToCountryCapitalDomainList();
+        _countryCapitalQuestions = await _getCapitalsGameUseCase.Execute();
 
         DisplayNextQuestion();
     }
@@ -77,14 +76,14 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private void DisplayNextQuestion()
     {
         _questionIndex++;
-        if (_questionIndex < _countryCapitalsList.Count())
+        if (_questionIndex < _countryCapitalQuestions?.Count())
         {
-            QuizProgress = $"{_questionIndex + 1}/{_countryCapitalsList.Count()}";
-            Question = _countryCapitalsList.ElementAt(_questionIndex).Name;
-            AnswerOne = _countryCapitalsList.ElementAt(_questionIndex).Capital;
-            AnswerTwo = _countryCapitalsList.ElementAt(_questionIndex).Capital;
-            AnswerThree = _countryCapitalsList.ElementAt(_questionIndex).Capital;
-            AnswerFour = _countryCapitalsList.ElementAt(_questionIndex).Capital;
+            QuizProgress = $"{_questionIndex + 1}/{_countryCapitalQuestions.Count()}";
+            Question = _countryCapitalQuestions.ElementAt(_questionIndex).Question;
+            AnswerOne = _countryCapitalQuestions.ElementAt(_questionIndex).Answers.ElementAt(0);
+            AnswerTwo = _countryCapitalQuestions.ElementAt(_questionIndex).Answers.ElementAt(1);
+            AnswerThree = _countryCapitalQuestions.ElementAt(_questionIndex).Answers.ElementAt(2);
+            AnswerFour = _countryCapitalQuestions.ElementAt(_questionIndex).Answers.ElementAt(3);
         }
     }
 }

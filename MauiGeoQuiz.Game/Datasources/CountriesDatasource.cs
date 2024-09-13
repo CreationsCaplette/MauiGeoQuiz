@@ -5,7 +5,7 @@ using System.Text.Json;
 namespace MauiGeoQuiz.Game.Datasources;
 public interface ICountriesDatasource
 {
-    Task<IEnumerable<CountryDataModel>> FetchCountriesData();
+    Task<IEnumerable<CountryDto>> FetchCountriesData();
 }
 
 public class CountriesApiDatasource : ICountriesDatasource
@@ -26,9 +26,9 @@ public class CountriesApiDatasource : ICountriesDatasource
         };
     }
 
-    public async Task<IEnumerable<CountryDataModel>> FetchCountriesData()
+    public async Task<IEnumerable<CountryDto>> FetchCountriesData()
     {
-        var countries = new List<CountryDataModel>();
+        var countries = new List<CountryDto>();
 
         var uri = new Uri(string.Format(Path.Combine(BaseUrl, Parameters), string.Empty));
         try
@@ -37,7 +37,7 @@ public class CountriesApiDatasource : ICountriesDatasource
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                countries = JsonSerializer.Deserialize<List<CountryDataModel>>(content, _serializerOptions);
+                countries = JsonSerializer.Deserialize<List<CountryDto>>(content, _serializerOptions);
             }
         }
         catch (Exception ex)

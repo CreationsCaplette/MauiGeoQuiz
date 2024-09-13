@@ -6,12 +6,13 @@ namespace MauiGeoQuiz.Game.Repositories;
 
 public interface IUpdateDataRepository
 {
-    Task<IEnumerable<CountryCapitalDomainModel>> UpdateData();
+    Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData();
 }
 public class UpdateDataRepository(ICountriesDatasource countriesDataSource) : IUpdateDataRepository
 {
-    public async Task<IEnumerable<CountryCapitalDomainModel>> UpdateData()
+    public async Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData()
     {
-        return (await countriesDataSource.FetchCountriesData()).Take(10).ToCountryCapitalDomainList();
+        var countriesList = await countriesDataSource.FetchCountriesData();
+        return countriesList.Where(c => c.Capitals.Count() > 0).ToCountryCapitalList();
     }
 }

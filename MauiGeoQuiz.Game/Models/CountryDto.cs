@@ -1,13 +1,13 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace MauiGeoQuiz.Game.Models;
-public class CountryDataModel
+public class CountryDto
 {
     [JsonPropertyName("name")]
-    public CountryNamesDataModel Name { get; set; } = new CountryNamesDataModel();
+    public CountryNamesDto Name { get; set; } = new CountryNamesDto();
 
     [JsonPropertyName("capital")]
-    public List<string> Capitals { get; set; } = [];
+    public IEnumerable<string> Capitals { get; set; } = [];
 
     [JsonPropertyName("region")]
     public string Region { get; set; } = string.Empty;
@@ -16,5 +16,5 @@ public class CountryDataModel
     public string SubRegion { get; set; } = string.Empty;
 
     [JsonPropertyName("flags")]
-    public FlagDataModel Flag { get; set; } = new FlagDataModel();
+    public FlagDto Flag { get; set; } = new FlagDto();
 }
