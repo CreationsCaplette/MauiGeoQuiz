@@ -9,10 +9,22 @@ public interface IUpdateDataRepository
     Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData();
 }
 public class UpdateDataRepository(
+    IScheduledUpdateDatasource scheduledUpdateDatasource,
     ICountriesRemoteDatasource countriesRemoteDatasource,
     ICountriesLocalDatasource countriesLocalDatasource) : IUpdateDataRepository
 {
     public async Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData()
+    {
+        if (scheduledUpdateDatasource.IsUpdateNeeded())
+        {
+            await PerformCacheUpdate();
+        }
+
+        return (await countriesLocalDatasource.GetAllCountries())
+            .ToCountryCapitalList();
+    }
+
+    private async Task PerformCacheUpdate()
     {
         var countriesList = (await countriesRemoteDatasource.FetchCountriesData())
             .Where(c => c.Capitals.Count() > 0)
@@ -23,7 +35,6 @@ public class UpdateDataRepository(
             await countriesLocalDatasource.InsertOrUpdateCountry(country);
         }
 
-        return (await countriesLocalDatasource.GetAllCountries())
-            .ToCountryCapitalList();
+        scheduledUpdateDatasource.UpdateWasDone();
     }
 }
