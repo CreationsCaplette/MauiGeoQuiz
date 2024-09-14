@@ -15,8 +15,13 @@ public class GetCapitalsGameUseCase(IUpdateDataRepository updateDataRepository) 
         var questionsList = new List<CountryCapitalQuestionModel>(GameConstants.NumberOfQuestions);
         for (var i = 0; i < GameConstants.NumberOfQuestions; i++)
         {
-            var answer = fullCountryList.Randomize().First();
-            var choices = GetChoices(answer, fullCountryList).Randomize().ToList();
+            var answer = fullCountryList
+                .Randomize()
+                .First();
+            var choices = GetChoices(answer, fullCountryList)
+                .Randomize()
+                .ToList();
+
             var question = new CountryCapitalQuestionModel(
                 Question: answer.Name,
                 Answers: choices,
@@ -33,7 +38,10 @@ public class GetCapitalsGameUseCase(IUpdateDataRepository updateDataRepository) 
         {
             answer.Capital,
         };
-        answerList.AddRange(countryList.Randomize().Take(3).Select(c => c.Capital));
+        answerList.AddRange(countryList
+            .Randomize()
+            .Take(3)
+            .Select(c => c.Capital));
         return answerList;
 
     }

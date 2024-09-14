@@ -3,12 +3,12 @@ using System.Diagnostics;
 using System.Text.Json;
 
 namespace MauiGeoQuiz.Game.Datasources;
-public interface ICountriesDatasource
+public interface ICountriesRemoteDatasource
 {
-    Task<IEnumerable<CountryDto>> FetchCountriesData();
+    public Task<IEnumerable<CountryRemoteDto>> FetchCountriesData();
 }
 
-public class CountriesApiDatasource : ICountriesDatasource
+public class CountriesRemoteDatasource : ICountriesRemoteDatasource
 {
     private const string BaseUrl = "https://restcountries.com/";
     private const string Parameters = "v3.1/all?fields=name,capital,region,subregion,flags";
@@ -16,7 +16,7 @@ public class CountriesApiDatasource : ICountriesDatasource
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _serializerOptions;
 
-    public CountriesApiDatasource(HttpClient httpClient)
+    public CountriesRemoteDatasource(HttpClient httpClient)
     {
         _httpClient = httpClient;
         _serializerOptions = new JsonSerializerOptions
@@ -26,9 +26,9 @@ public class CountriesApiDatasource : ICountriesDatasource
         };
     }
 
-    public async Task<IEnumerable<CountryDto>> FetchCountriesData()
+    public async Task<IEnumerable<CountryRemoteDto>> FetchCountriesData()
     {
-        var countries = new List<CountryDto>();
+        var countries = new List<CountryRemoteDto>();
 
         var uri = new Uri(string.Format(Path.Combine(BaseUrl, Parameters), string.Empty));
         try
@@ -37,7 +37,7 @@ public class CountriesApiDatasource : ICountriesDatasource
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                countries = JsonSerializer.Deserialize<List<CountryDto>>(content, _serializerOptions);
+                countries = JsonSerializer.Deserialize<List<CountryRemoteDto>>(content, _serializerOptions);
             }
         }
         catch (Exception ex)

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace MauiGeoQuiz.Game.Models;
-public class CountryDto
+public class CountryRemoteDto
 {
     [JsonPropertyName("name")]
     public CountryNamesDto Name { get; set; } = new CountryNamesDto();
