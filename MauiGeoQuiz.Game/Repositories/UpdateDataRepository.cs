@@ -14,14 +14,14 @@ public class UpdateDataRepository(
 {
     public async Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData()
     {
-        /*var countriesList = (await countriesRemoteDatasource.FetchCountriesData())
+        var countriesList = (await countriesRemoteDatasource.FetchCountriesData())
             .Where(c => c.Capitals.Count() > 0)
             .ToCountryLocalDtoList();
 
         foreach (var country in countriesList)
         {
             await countriesLocalDatasource.InsertOrUpdateCountry(country);
-        }*/
+        }
 
         return (await countriesLocalDatasource.GetAllCountries())
             .ToCountryCapitalList();
