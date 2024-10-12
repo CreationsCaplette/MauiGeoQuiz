@@ -611,12 +611,8 @@
                             <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Active}, Dark={StaticResource Active}}" />
                         </VisualState.Setters>
                     </VisualState>
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightAccent}, Dark={StaticResource LightAccent}}" />
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Disabled}, Dark={StaticResource Disabled}}" />
-                        </VisualState.Setters>
-                    </VisualState>
+                    <VisualState x:Name="Disabled" />
+
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>

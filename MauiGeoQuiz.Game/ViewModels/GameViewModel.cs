@@ -11,16 +11,21 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
     private readonly GetCapitalsGameUseCase _getCapitalsGameUseCase;
-    private IEnumerable<CountryCapitalQuestionModel>? _countryCapitalQuestions;
+    private IEnumerable<CountryCapitalQuestionModel> _countryCapitalQuestions = [];
     private int _questionIndex;
 
-    [Reactive] public string? QuizProgress { get; set; }
-    [Reactive] public string? Question { get; set; }
-    [Reactive] public string? AnswerOne { get; set; }
+    [Reactive] public string QuizProgress { get; set; } = string.Empty;
+    [Reactive] public string Question { get; set; } = string.Empty;
+    [Reactive] public string AnswerOne { get; set; } = string.Empty;
+    [Reactive] public string AnswerTwo { get; set; } = string.Empty;
+    [Reactive] public string AnswerThree { get; set; } = string.Empty;
+    [Reactive] public string AnswerFour { get; set; } = string.Empty;
     [Reactive] public Validity AnswerOneValidity { get; set; }
-    [Reactive] public string? AnswerTwo { get; set; }
-    [Reactive] public string? AnswerThree { get; set; }
-    [Reactive] public string? AnswerFour { get; set; }
+    [Reactive] public Validity AnswerTwoValidity { get; set; }
+    [Reactive] public Validity AnswerThreeValidity { get; set; }
+    [Reactive] public Validity AnswerFourValidity { get; set; }
+    [Reactive] public bool AnswersEnabled { get; set; }
+    [Reactive] public bool NextQuestionVisible { get; set; }
 
     public ReactiveCommand<Unit, Unit> AnswerOneCommand { get; }
     public ReactiveCommand<Unit, Unit> AnswerTwoCommand { get; }
@@ -35,10 +40,10 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         _navigationService = navigationService;
         _getCapitalsGameUseCase = getCapitalsGameUseCase;
 
-        AnswerOneCommand = ReactiveCommand.Create(OnAnswerOne);
-        AnswerTwoCommand = ReactiveCommand.Create(OnAnswerTwo);
-        AnswerThreeCommand = ReactiveCommand.Create(OnAnswerThree);
-        AnswerFourCommand = ReactiveCommand.Create(OnAnswerFour);
+        AnswerOneCommand = ReactiveCommand.Create(() => ValidateAnswer(0));
+        AnswerTwoCommand = ReactiveCommand.Create(() => ValidateAnswer(1));
+        AnswerThreeCommand = ReactiveCommand.Create(() => ValidateAnswer(2));
+        AnswerFourCommand = ReactiveCommand.Create(() => ValidateAnswer(3));
         NextQuestionCommand = ReactiveCommand.Create(OnNextQuestion);
     }
 
@@ -50,24 +55,30 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         DisplayNextQuestion();
     }
 
-    private async void OnAnswerOne()
+    private void ValidateAnswer(int guessIndex)
     {
-        AnswerOneValidity = Validity.Valid;
-    }
+        var currentQuestion = _countryCapitalQuestions.ElementAt(_questionIndex);
+        var answerValidity = currentQuestion.AnswerIndex == guessIndex ? Validity.Valid : Validity.Invalid;
 
-    private async void OnAnswerTwo()
-    {
+        AnswersEnabled = false;
 
-    }
+        switch (guessIndex)
+        {
+            case 0:
+                AnswerOneValidity = answerValidity;
+                break;
+            case 1:
+                AnswerTwoValidity = answerValidity;
+                break;
+            case 2:
+                AnswerThreeValidity = answerValidity;
+                break;
+            case 3:
+                AnswerFourValidity = answerValidity;
+                break;
+        }
 
-    private async void OnAnswerThree()
-    {
-
-    }
-
-    private async void OnAnswerFour()
-    {
-
+        NextQuestionVisible = true;
     }
 
     private void OnNextQuestion()
@@ -78,14 +89,23 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private void DisplayNextQuestion()
     {
         _questionIndex++;
-        if (_questionIndex < _countryCapitalQuestions?.Count())
+        if (_questionIndex < _countryCapitalQuestions.Count())
         {
             QuizProgress = $"{_questionIndex + 1}/{_countryCapitalQuestions.Count()}";
-            Question = _countryCapitalQuestions.ElementAt(_questionIndex).Question;
-            AnswerOne = _countryCapitalQuestions.ElementAt(_questionIndex).Answers.ElementAt(0);
-            AnswerTwo = _countryCapitalQuestions.ElementAt(_questionIndex).Answers.ElementAt(1);
-            AnswerThree = _countryCapitalQuestions.ElementAt(_questionIndex).Answers.ElementAt(2);
-            AnswerFour = _countryCapitalQuestions.ElementAt(_questionIndex).Answers.ElementAt(3);
+
+            var currentQuestion = _countryCapitalQuestions.ElementAt(_questionIndex);
+            Question = currentQuestion.Question;
+            AnswerOne = currentQuestion.Answers.ElementAt(0);
+            AnswerOneValidity = Validity.Idle;
+            AnswerTwo = currentQuestion.Answers.ElementAt(1);
+            AnswerTwoValidity = Validity.Idle;
+            AnswerThree = currentQuestion.Answers.ElementAt(2);
+            AnswerThreeValidity = Validity.Idle;
+            AnswerFour = currentQuestion.Answers.ElementAt(3);
+            AnswerFourValidity = Validity.Idle;
+
+            AnswersEnabled = true;
+            NextQuestionVisible = false;
         }
     }
 }

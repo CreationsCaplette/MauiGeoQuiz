@@ -57,26 +57,34 @@
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerOne}"
                 IsValid="{Binding AnswerOneValidity}"
+                IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerOneCommand}"/>
 
-            <Button
+            <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerTwo}"
+                IsValid="{Binding AnswerTwoValidity}"
+                IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerTwoCommand}"/>
 
-            <Button
+            <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerThree}"
+                IsValid="{Binding AnswerThreeValidity}"
+                IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerThreeCommand}"/>
 
-            <Button
+            <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerFour}"
+                IsValid="{Binding AnswerFourValidity}"
+                IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerFourCommand}"/>
 
             <Button
                 Style="{StaticResource TextButton}"
                 Text="{x:Static strings:Strings.NextQuestion}"
+                IsVisible="{Binding NextQuestionVisible}"
                 Command="{Binding NextQuestionCommand}"/>
 
         </VerticalStackLayout>
