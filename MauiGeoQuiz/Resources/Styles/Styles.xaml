@@ -557,7 +557,8 @@
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="MinimumHeightRequest" Value="32"/>
-        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="MinimumWidthRequest" Value="256"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -592,7 +593,8 @@
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="CornerRadius" Value="24"/>
         <Setter Property="MinimumHeightRequest" Value="48"/>
-        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="MinimumWidthRequest" Value="256"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">

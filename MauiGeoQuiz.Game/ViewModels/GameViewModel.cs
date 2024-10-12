@@ -4,6 +4,7 @@ using MauiGeoQuiz.Core.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Reactive;
+using MauiGeoQuiz.Core.Enums;
 
 namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
@@ -16,6 +17,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     [Reactive] public string? QuizProgress { get; set; }
     [Reactive] public string? Question { get; set; }
     [Reactive] public string? AnswerOne { get; set; }
+    [Reactive] public Validity AnswerOneValidity { get; set; }
     [Reactive] public string? AnswerTwo { get; set; }
     [Reactive] public string? AnswerThree { get; set; }
     [Reactive] public string? AnswerFour { get; set; }
@@ -50,7 +52,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     private async void OnAnswerOne()
     {
-
+        AnswerOneValidity = Validity.Valid;
     }
 
     private async void OnAnswerTwo()
