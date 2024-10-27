@@ -4,7 +4,9 @@ using MauiGeoQuiz.Core.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Reactive;
+using System.Reactive.Linq;
 using MauiGeoQuiz.Core.Enums;
+using MauiGeoQuiz.Core.Constants;
 
 namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
@@ -13,10 +15,11 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private readonly GetCapitalsGameUseCase _getCapitalsGameUseCase;
     private IEnumerable<CountryCapitalQuestionModel> _countryCapitalQuestions = [];
     private int _questionIndex;
+    private IDisposable _timerSubscription;
 
-    [Reactive] public int Score { get; set; } = 0;
+    [Reactive] public long Score { get; set; } = 0;
     [Reactive] public string Progress { get; set; } = string.Empty;
-    [Reactive] public string Timer { get; set; } = string.Empty;
+    [Reactive] public long Timer { get; set; } = 0;
     [Reactive] public string Question { get; set; } = string.Empty;
     [Reactive] public string AnswerOne { get; set; } = string.Empty;
     [Reactive] public string AnswerTwo { get; set; } = string.Empty;
@@ -59,7 +62,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     private void ValidateAnswer(int guessIndex)
     {
-        var currentQuestion = _countryCapitalQuestions.ElementAt(_questionIndex);
+        _timerSubscription.Dispose();
 
         AnswersEnabled = false;
         AnswerOneState = GameButtonStates.Disabled;
@@ -67,10 +70,10 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         AnswerThreeState = GameButtonStates.Disabled;
         AnswerFourState = GameButtonStates.Disabled;
 
-        var isAnswerGood = currentQuestion.AnswerIndex == guessIndex;
+        var isAnswerGood = _countryCapitalQuestions.ElementAt(_questionIndex).AnswerIndex == guessIndex;
 
         var answerState = isAnswerGood ? GameButtonStates.Positive : GameButtonStates.Negative;
-        Score += isAnswerGood ? 10 : 0;
+        Score += isAnswerGood ? Timer : 0;
 
         switch (guessIndex)
         {
@@ -117,5 +120,50 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
             AnswersEnabled = true;
             NextQuestionVisible = false;
         }
+
+        Countdown(GameConstants.Timer);
+    }
+
+    private void UpdateTimer(long currentSecond)
+    {
+        Timer = currentSecond;
+    }
+
+    private void OnCountdownFinished()
+    {
+        _timerSubscription.Dispose();
+
+        AnswersEnabled = false;
+        AnswerOneState = GameButtonStates.Disabled;
+        AnswerTwoState = GameButtonStates.Disabled;
+        AnswerThreeState = GameButtonStates.Disabled;
+        AnswerFourState = GameButtonStates.Disabled;
+
+        switch (_countryCapitalQuestions.ElementAt(_questionIndex).AnswerIndex)
+        {
+            case 0:
+                AnswerOneState = GameButtonStates.Negative;
+                break;
+            case 1:
+                AnswerTwoState = GameButtonStates.Negative;
+                break;
+            case 2:
+                AnswerThreeState = GameButtonStates.Negative;
+                break;
+            case 3:
+                AnswerFourState = GameButtonStates.Negative;
+                break;
+        }
+
+        NextQuestionVisible = true;
+    }
+
+    private void Countdown(int maxSeconds)
+    {
+        _timerSubscription = Observable
+            .Timer(DateTimeOffset.UtcNow, TimeSpan.FromSeconds(1))
+            .TakeWhile(currentSecond => currentSecond <= maxSeconds)
+            .Select(currentSecond => maxSeconds - currentSecond)
+            .Subscribe(UpdateTimer, OnCountdownFinished);
     }
 }
