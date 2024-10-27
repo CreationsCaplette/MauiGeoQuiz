@@ -4,5 +4,5 @@ public static class GameConstants
 {
     public const int NumberOfQuestions = 10;
     public const int NumberOfChoices = 4;
-    public const int Timer = 10;
+    public const int TimerMilliseconds = 10000;
 }

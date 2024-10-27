@@ -25,7 +25,7 @@
                 <Label
                     Style="{StaticResource InfoLabel}"
                     Grid.Column="0"
-                    Text="{Binding Score}"
+                    Text="{Binding Score, StringFormat='{0:F2}'}"
                     HorizontalOptions="Start" />
 
                 <Label
@@ -38,7 +38,7 @@
 
             <Label
                 Style="{StaticResource TimerLabel}"
-                Text="{Binding Timer}"
+                Text="{Binding Timer, StringFormat='{0:F2}'}"
                 HorizontalOptions="Center" />
 
             <Label

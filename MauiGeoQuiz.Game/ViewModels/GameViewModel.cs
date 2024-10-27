@@ -13,13 +13,15 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
     private readonly GetCapitalsGameUseCase _getCapitalsGameUseCase;
+    private readonly ICountdownTimer _countdownTimer;
+
     private IEnumerable<CountryCapitalQuestionModel> _countryCapitalQuestions = [];
     private int _questionIndex;
-    private IDisposable _timerSubscription;
+    private IDisposable? _timerSubscription;
 
-    [Reactive] public long Score { get; set; } = 0;
+    [Reactive] public float Score { get; set; } = 0;
     [Reactive] public string Progress { get; set; } = string.Empty;
-    [Reactive] public long Timer { get; set; } = 0;
+    [Reactive] public float Timer { get; set; } = 0;
     [Reactive] public string Question { get; set; } = string.Empty;
     [Reactive] public string AnswerOne { get; set; } = string.Empty;
     [Reactive] public string AnswerTwo { get; set; } = string.Empty;
@@ -40,10 +42,11 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     public ViewModelActivator Activator { get; } = new();
 
-    public GameViewModel(INavigationService navigationService, GetCapitalsGameUseCase getCapitalsGameUseCase)
+    public GameViewModel(INavigationService navigationService, GetCapitalsGameUseCase getCapitalsGameUseCase, ICountdownTimer countdownTimer)
     {
         _navigationService = navigationService;
         _getCapitalsGameUseCase = getCapitalsGameUseCase;
+        _countdownTimer = countdownTimer;
 
         AnswerOneCommand = ReactiveCommand.Create(() => ValidateAnswer(0));
         AnswerTwoCommand = ReactiveCommand.Create(() => ValidateAnswer(1));
@@ -62,7 +65,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     private void ValidateAnswer(int guessIndex)
     {
-        _timerSubscription.Dispose();
+        _timerSubscription?.Dispose();
 
         AnswersEnabled = false;
         AnswerOneState = GameButtonStates.Disabled;
@@ -121,17 +124,17 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
             NextQuestionVisible = false;
         }
 
-        Countdown(GameConstants.Timer);
+        _timerSubscription = _countdownTimer.StartCountdown(GameConstants.TimerMilliseconds, UpdateTimer, OnCountdownFinished);
     }
 
-    private void UpdateTimer(long currentSecond)
+    private void UpdateTimer(float currentSecond)
     {
         Timer = currentSecond;
     }
 
     private void OnCountdownFinished()
     {
-        _timerSubscription.Dispose();
+        _timerSubscription?.Dispose();
 
         AnswersEnabled = false;
         AnswerOneState = GameButtonStates.Disabled;
@@ -156,14 +159,5 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         }
 
         NextQuestionVisible = true;
-    }
-
-    private void Countdown(int maxSeconds)
-    {
-        _timerSubscription = Observable
-            .Timer(DateTimeOffset.UtcNow, TimeSpan.FromSeconds(1))
-            .TakeWhile(currentSecond => currentSecond <= maxSeconds)
-            .Select(currentSecond => maxSeconds - currentSecond)
-            .Subscribe(UpdateTimer, OnCountdownFinished);
     }
 }
