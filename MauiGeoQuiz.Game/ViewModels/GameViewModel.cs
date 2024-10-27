@@ -20,10 +20,10 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     [Reactive] public string AnswerTwo { get; set; } = string.Empty;
     [Reactive] public string AnswerThree { get; set; } = string.Empty;
     [Reactive] public string AnswerFour { get; set; } = string.Empty;
-    [Reactive] public Validity AnswerOneValidity { get; set; }
-    [Reactive] public Validity AnswerTwoValidity { get; set; }
-    [Reactive] public Validity AnswerThreeValidity { get; set; }
-    [Reactive] public Validity AnswerFourValidity { get; set; }
+    [Reactive] public GameButtonStates AnswerOneState { get; set; }
+    [Reactive] public GameButtonStates AnswerTwoState { get; set; }
+    [Reactive] public GameButtonStates AnswerThreeState { get; set; }
+    [Reactive] public GameButtonStates AnswerFourState { get; set; }
     [Reactive] public bool AnswersEnabled { get; set; }
     [Reactive] public bool NextQuestionVisible { get; set; }
 
@@ -58,23 +58,27 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private void ValidateAnswer(int guessIndex)
     {
         var currentQuestion = _countryCapitalQuestions.ElementAt(_questionIndex);
-        var answerValidity = currentQuestion.AnswerIndex == guessIndex ? Validity.Valid : Validity.Invalid;
+        var answerState = currentQuestion.AnswerIndex == guessIndex ? GameButtonStates.Positive : GameButtonStates.Negative;
 
         AnswersEnabled = false;
+        AnswerOneState = GameButtonStates.Disabled;
+        AnswerTwoState = GameButtonStates.Disabled;
+        AnswerThreeState = GameButtonStates.Disabled;
+        AnswerFourState = GameButtonStates.Disabled;
 
         switch (guessIndex)
         {
             case 0:
-                AnswerOneValidity = answerValidity;
+                AnswerOneState = answerState;
                 break;
             case 1:
-                AnswerTwoValidity = answerValidity;
+                AnswerTwoState = answerState;
                 break;
             case 2:
-                AnswerThreeValidity = answerValidity;
+                AnswerThreeState = answerState;
                 break;
             case 3:
-                AnswerFourValidity = answerValidity;
+                AnswerFourState = answerState;
                 break;
         }
 
@@ -96,13 +100,13 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
             var currentQuestion = _countryCapitalQuestions.ElementAt(_questionIndex);
             Question = currentQuestion.Question;
             AnswerOne = currentQuestion.Answers.ElementAt(0);
-            AnswerOneValidity = Validity.Idle;
+            AnswerOneState = GameButtonStates.Idle;
             AnswerTwo = currentQuestion.Answers.ElementAt(1);
-            AnswerTwoValidity = Validity.Idle;
+            AnswerTwoState = GameButtonStates.Idle;
             AnswerThree = currentQuestion.Answers.ElementAt(2);
-            AnswerThreeValidity = Validity.Idle;
+            AnswerThreeState = GameButtonStates.Idle;
             AnswerFour = currentQuestion.Answers.ElementAt(3);
-            AnswerFourValidity = Validity.Idle;
+            AnswerFourState = GameButtonStates.Idle;
 
             AnswersEnabled = true;
             NextQuestionVisible = false;

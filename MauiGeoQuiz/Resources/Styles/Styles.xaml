@@ -612,7 +612,6 @@
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="Disabled" />
-
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>

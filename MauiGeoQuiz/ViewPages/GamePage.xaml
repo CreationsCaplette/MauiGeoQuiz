@@ -56,28 +56,28 @@
             <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerOne}"
-                IsValid="{Binding AnswerOneValidity}"
+                State="{Binding AnswerOneState}"
                 IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerOneCommand}"/>
 
             <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerTwo}"
-                IsValid="{Binding AnswerTwoValidity}"
+                State="{Binding AnswerTwoState}"
                 IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerTwoCommand}"/>
 
             <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerThree}"
-                IsValid="{Binding AnswerThreeValidity}"
+                State="{Binding AnswerThreeState}"
                 IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerThreeCommand}"/>
 
             <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerFour}"
-                IsValid="{Binding AnswerFourValidity}"
+                State="{Binding AnswerFourState}"
                 IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerFourCommand}"/>
 
