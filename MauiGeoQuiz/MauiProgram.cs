@@ -9,6 +9,7 @@ using MauiGeoQuiz.MainMenu.ViewModels;
 using MauiGeoQuiz.Services;
 using MauiGeoQuiz.ViewPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Handlers;
 
 namespace MauiGeoQuiz;
 public static class MauiProgram
@@ -24,9 +25,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        SetupServices(builder);
-        SetupPresentation(builder);
-        SetupDomain(builder);
+        SetupCore(builder);
+        SetupPages(builder);
+        SetupUseCases(builder);
         SetupData(builder);
 
 #if DEBUG
@@ -36,13 +37,13 @@ public static class MauiProgram
         return builder.Build();
     }
 
-    private static void SetupServices(MauiAppBuilder builder)
+    private static void SetupCore(MauiAppBuilder builder)
     {
         builder.Services.AddSingleton<INavigationService, NavigationService>();
         builder.Services.AddSingleton<IStringService, StringService>();
     }
 
-    private static void SetupPresentation(MauiAppBuilder builder)
+    private static void SetupPages(MauiAppBuilder builder)
     {
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddScoped<MainMenuViewModel>();
@@ -54,7 +55,7 @@ public static class MauiProgram
         builder.Services.AddScoped<GameViewModel>();
     }
 
-    private static void SetupDomain(MauiAppBuilder builder)
+    private static void SetupUseCases(MauiAppBuilder builder)
     {
         builder.Services.AddScoped<ContactUsUseCase>();
         builder.Services.AddScoped<GetVersionUseCase>();

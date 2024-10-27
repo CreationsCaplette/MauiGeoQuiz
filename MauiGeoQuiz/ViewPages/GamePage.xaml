@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maui="clr-namespace:ReactiveUI.Maui;assembly=ReactiveUI.Maui"
+    xmlns:controls="clr-namespace:MauiGeoQuiz.Controls"
     xmlns:vm="clr-namespace:MauiGeoQuiz.Game.ViewModels;assembly=MauiGeoQuiz.Game"
     xmlns:strings="clr-namespace:MauiGeoQuiz.Resources.Strings"
     x:TypeArguments="vm:GameViewModel"
@@ -24,7 +25,7 @@
                 <Label
                     Style="{StaticResource InfoLabel}"
                     Grid.Column="0"
-                    Text="24"
+                    Text="{Binding QuizScore}"
                     HorizontalOptions="Start" />
 
                 <Label
@@ -52,29 +53,38 @@
                 HorizontalOptions="Center"
                 IsVisible="false"/>
 
-            <Button
+            <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerOne}"
+                State="{Binding AnswerOneState}"
+                IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerOneCommand}"/>
 
-            <Button
+            <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerTwo}"
+                State="{Binding AnswerTwoState}"
+                IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerTwoCommand}"/>
 
-            <Button
+            <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerThree}"
+                State="{Binding AnswerThreeState}"
+                IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerThreeCommand}"/>
 
-            <Button
+            <controls:GameButton
                 Style="{StaticResource GameButton}"
                 Text="{Binding AnswerFour}"
+                State="{Binding AnswerFourState}"
+                IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerFourCommand}"/>
 
             <Button
                 Style="{StaticResource TextButton}"
                 Text="{x:Static strings:Strings.NextQuestion}"
+                IsVisible="{Binding NextQuestionVisible}"
                 Command="{Binding NextQuestionCommand}"/>
 
         </VerticalStackLayout>
