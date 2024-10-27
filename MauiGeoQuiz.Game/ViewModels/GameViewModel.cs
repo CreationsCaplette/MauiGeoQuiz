@@ -14,8 +14,9 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private IEnumerable<CountryCapitalQuestionModel> _countryCapitalQuestions = [];
     private int _questionIndex;
 
-    [Reactive] public int QuizScore { get; set; } = 0;
-    [Reactive] public string QuizProgress { get; set; } = string.Empty;
+    [Reactive] public int Score { get; set; } = 0;
+    [Reactive] public string Progress { get; set; } = string.Empty;
+    [Reactive] public string Timer { get; set; } = string.Empty;
     [Reactive] public string Question { get; set; } = string.Empty;
     [Reactive] public string AnswerOne { get; set; } = string.Empty;
     [Reactive] public string AnswerTwo { get; set; } = string.Empty;
@@ -69,7 +70,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         var isAnswerGood = currentQuestion.AnswerIndex == guessIndex;
 
         var answerState = isAnswerGood ? GameButtonStates.Positive : GameButtonStates.Negative;
-        QuizScore += isAnswerGood ? 10 : 0;
+        Score += isAnswerGood ? 10 : 0;
 
         switch (guessIndex)
         {
@@ -100,7 +101,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         _questionIndex++;
         if (_questionIndex < _countryCapitalQuestions.Count())
         {
-            QuizProgress = $"{_questionIndex + 1}/{_countryCapitalQuestions.Count()}";
+            Progress = $"{_questionIndex + 1}/{_countryCapitalQuestions.Count()}";
 
             var currentQuestion = _countryCapitalQuestions.ElementAt(_questionIndex);
             Question = currentQuestion.Question;
