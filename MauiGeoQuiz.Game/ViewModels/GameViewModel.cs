@@ -14,6 +14,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private IEnumerable<CountryCapitalQuestionModel> _countryCapitalQuestions = [];
     private int _questionIndex;
 
+    [Reactive] public int QuizScore { get; set; } = 0;
     [Reactive] public string QuizProgress { get; set; } = string.Empty;
     [Reactive] public string Question { get; set; } = string.Empty;
     [Reactive] public string AnswerOne { get; set; } = string.Empty;
@@ -58,13 +59,17 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private void ValidateAnswer(int guessIndex)
     {
         var currentQuestion = _countryCapitalQuestions.ElementAt(_questionIndex);
-        var answerState = currentQuestion.AnswerIndex == guessIndex ? GameButtonStates.Positive : GameButtonStates.Negative;
 
         AnswersEnabled = false;
         AnswerOneState = GameButtonStates.Disabled;
         AnswerTwoState = GameButtonStates.Disabled;
         AnswerThreeState = GameButtonStates.Disabled;
         AnswerFourState = GameButtonStates.Disabled;
+
+        var isAnswerGood = currentQuestion.AnswerIndex == guessIndex;
+
+        var answerState = isAnswerGood ? GameButtonStates.Positive : GameButtonStates.Negative;
+        QuizScore += isAnswerGood ? 10 : 0;
 
         switch (guessIndex)
         {

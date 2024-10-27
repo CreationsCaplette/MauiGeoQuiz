@@ -25,7 +25,7 @@
                 <Label
                     Style="{StaticResource InfoLabel}"
                     Grid.Column="0"
-                    Text="24"
+                    Text="{Binding QuizScore}"
                     HorizontalOptions="Start" />
 
                 <Label
