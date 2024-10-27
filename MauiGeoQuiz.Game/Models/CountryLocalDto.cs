@@ -9,8 +9,8 @@ public class CountryLocalDto
     public int Id { get; set; }
 
     [Column("Name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [Column("Capital")]
-    public string Capital {  get; set; }
+    public string Capital { get; set; } = string.Empty;
 }

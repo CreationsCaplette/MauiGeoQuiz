@@ -41,6 +41,7 @@ public static class MauiProgram
     {
         builder.Services.AddSingleton<INavigationService, NavigationService>();
         builder.Services.AddSingleton<IStringService, StringService>();
+        builder.Services.AddTransient<ICountdownTimer, CountdownTimer>();
     }
 
     private static void SetupPages(MauiAppBuilder builder)
