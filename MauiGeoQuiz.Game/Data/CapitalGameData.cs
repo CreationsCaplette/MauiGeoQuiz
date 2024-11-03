@@ -16,13 +16,16 @@ public class CapitalGameData(IGameDataRepository updateDataRepository) : ICapita
     private IObserver<CountryCapitalQuestionModel>? _observer;
     private IEnumerable<CountryCapitalModel>? _countryData;
 
+    private List<string> _answers;
+
     public IDisposable Subscribe(IObserver<CountryCapitalQuestionModel> observer)
     {
         _observer = observer;
+        _answers = new List<string>();
 
         return Observable
             .FromAsync(updateDataRepository.FetchCountryCapitalData)
-            .Do(data => _countryData = data)
+            .Do(data => _countryData = data.ToList())
             .Select(_ => GetQuestion())
             .Subscribe(observer);
     }
@@ -41,9 +44,8 @@ public class CapitalGameData(IGameDataRepository updateDataRepository) : ICapita
 
     private CountryCapitalQuestionModel GetQuestion()
     {
-        var answer = _countryData
-            .Randomize()
-            .First();
+        var answer = GetAnswer();
+        _answers.Add(answer.Name);
 
         var choices = GetChoices(answer, _countryData)
                 .Randomize()
@@ -53,6 +55,14 @@ public class CapitalGameData(IGameDataRepository updateDataRepository) : ICapita
             Question: answer.Name,
             Answers: choices,
             AnswerIndex: choices.IndexOf(answer.Capital));
+    }
+
+    private CountryCapitalModel GetAnswer()
+    {
+        return _countryData
+            .Randomize()
+            .Where(c => _answers.All(a => a != c.Name))
+            .First();
     }
 
     private IEnumerable<string> GetChoices(CountryCapitalModel answer, IEnumerable<CountryCapitalModel> countryList)
