@@ -19,7 +19,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private int _questionIndex;
     private IDisposable? _timerSubscription;
 
-    [Reactive] public float Score { get; set; } = 0;
+    [Reactive] public int Score { get; set; } = 0;
     [Reactive] public string Progress { get; set; } = string.Empty;
     [Reactive] public float Timer { get; set; } = 0;
     [Reactive] public string Question { get; set; } = string.Empty;
@@ -76,7 +76,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         var isAnswerGood = _countryCapitalQuestions.ElementAt(_questionIndex).AnswerIndex == guessIndex;
 
         var answerState = isAnswerGood ? GameButtonStates.Positive : GameButtonStates.Negative;
-        Score += isAnswerGood ? Timer : 0;
+        Score += isAnswerGood ? (int)(Timer * 10) : 0;
 
         switch (guessIndex)
         {
@@ -124,7 +124,9 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
             NextQuestionVisible = false;
         }
 
-        _timerSubscription = _countdownTimer.StartCountdown(GameConstants.TimerMilliseconds, UpdateTimer, OnCountdownFinished);
+        _timerSubscription = _countdownTimer
+            .GetTimerObservable(GameConstants.TimerMilliseconds)
+            .Subscribe(UpdateTimer, OnCountdownFinished);
     }
 
     private void UpdateTimer(float currentSecond)

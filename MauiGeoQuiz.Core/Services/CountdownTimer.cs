@@ -4,20 +4,19 @@ namespace MauiGeoQuiz.Core.Services;
 
 public interface ICountdownTimer
 {
-    IDisposable StartCountdown(long timerMilliseconds, Action<float> onUpdateAction, Action onCompleteAction);
+    IObservable<float> GetTimerObservable(long timerMilliseconds);
 }
 public class CountdownTimer : ICountdownTimer
 {
-    private const int TickTimeSpan = 50;
+    private const int TickTimeSpan = 100;
 
-    public IDisposable StartCountdown(long timerMilliseconds, Action<float> onUpdateAction, Action onCompleteAction)
+    public IObservable<float> GetTimerObservable(long timerMilliseconds)
     {
         var totalTicks = timerMilliseconds / TickTimeSpan;
 
         return Observable
             .Timer(DateTimeOffset.UtcNow, TimeSpan.FromMilliseconds(TickTimeSpan))
             .TakeWhile(tick => tick <= totalTicks)
-            .Select(tick => (timerMilliseconds - (tick * TickTimeSpan)) / 1000.0f)
-            .Subscribe(onUpdateAction, onCompleteAction);
+            .Select(tick => (timerMilliseconds - (tick * TickTimeSpan)) / 1000.0f);
     }
 }
