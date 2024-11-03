@@ -1,5 +1,4 @@
-﻿using MauiGeoQuiz.Game.UseCases;
-using MauiGeoQuiz.Game.Models;
+﻿using MauiGeoQuiz.Game.Models;
 using MauiGeoQuiz.Core.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -13,11 +12,9 @@ namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
-    private readonly GetCapitalsGameUseCase _getCapitalsGameUseCase;
     private readonly ICapitalGameData _capitalGameData;
     private readonly ICountdownTimer _countdownTimer;
 
-    private IEnumerable<CountryCapitalQuestionModel> _countryCapitalQuestions = [];
     private int _questionIndex;
     private int _answerIndex;
 
@@ -47,10 +44,9 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     public ViewModelActivator Activator { get; } = new();
 
-    public GameViewModel(INavigationService navigationService, GetCapitalsGameUseCase getCapitalsGameUseCase, ICapitalGameData capitalGameData, ICountdownTimer countdownTimer)
+    public GameViewModel(INavigationService navigationService, ICapitalGameData capitalGameData, ICountdownTimer countdownTimer)
     {
         _navigationService = navigationService;
-        _getCapitalsGameUseCase = getCapitalsGameUseCase;
         _capitalGameData = capitalGameData;
         _countdownTimer = countdownTimer;
 
@@ -61,23 +57,11 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         NextQuestionCommand = ReactiveCommand.Create(OnNextQuestion);
     }
 
-    public async Task GetQuizData()
+    public void GetQuizData()
     {
-        _questionIndex = -1;
-        _countryCapitalQuestions = await _getCapitalsGameUseCase.Execute();
-
         _gameDataSubscription = _capitalGameData.Subscribe(
-            q => {
-                Question = q.Question;
-                AnswerOne = q.Answers.ElementAt(0);
-                AnswerTwo = q.Answers.ElementAt(1);
-                AnswerThree = q.Answers.ElementAt(2);
-                AnswerFour = q.Answers.ElementAt(3);
-                _answerIndex = q.AnswerIndex;
-            },
+            DisplayQuestion,
             () => { });
-
-        DisplayNextQuestion();
     }
 
     private void ValidateAnswer(int guessIndex)
@@ -116,31 +100,29 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     private void OnNextQuestion()
     {
-        DisplayNextQuestion();
         _capitalGameData.TriggerNextQuestion();
     }
 
-    private void DisplayNextQuestion()
+    private void DisplayQuestion(CountryCapitalQuestionModel question)
     {
         _questionIndex++;
-        if (_questionIndex < _countryCapitalQuestions.Count())
-        {
-            Progress = $"{_questionIndex + 1}/{_countryCapitalQuestions.Count()}";
 
-            var currentQuestion = _countryCapitalQuestions.ElementAt(_questionIndex);
-            //Question = currentQuestion.Question;
-            //AnswerOne = currentQuestion.Answers.ElementAt(0);
-            AnswerOneState = GameButtonStates.Idle;
-            //AnswerTwo = currentQuestion.Answers.ElementAt(1);
-            AnswerTwoState = GameButtonStates.Idle;
-            //AnswerThree = currentQuestion.Answers.ElementAt(2);
-            AnswerThreeState = GameButtonStates.Idle;
-            //AnswerFour = currentQuestion.Answers.ElementAt(3);
-            AnswerFourState = GameButtonStates.Idle;
+        Progress = $"{_questionIndex + 1}/{GameConstants.NumberOfQuestions}";
 
-            AnswersEnabled = true;
-            NextQuestionVisible = false;
-        }
+        Question = question.Question;
+        AnswerOne = question.Answers.ElementAt(0);
+        AnswerTwo = question.Answers.ElementAt(1);
+        AnswerThree = question.Answers.ElementAt(2);
+        AnswerFour = question.Answers.ElementAt(3);
+        _answerIndex = question.AnswerIndex;
+
+        AnswerOneState = GameButtonStates.Idle;
+        AnswerTwoState = GameButtonStates.Idle;
+        AnswerThreeState = GameButtonStates.Idle;
+        AnswerFourState = GameButtonStates.Idle;
+
+        AnswersEnabled = true;
+        NextQuestionVisible = false;
 
         _timerSubscription = _countdownTimer
             .GetTimerObservable(GameConstants.TimerMilliseconds)
@@ -162,7 +144,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         AnswerThreeState = GameButtonStates.Disabled;
         AnswerFourState = GameButtonStates.Disabled;
 
-        switch (_countryCapitalQuestions.ElementAt(_questionIndex).AnswerIndex)
+        switch (_answerIndex)
         {
             case 0:
                 AnswerOneState = GameButtonStates.Negative;

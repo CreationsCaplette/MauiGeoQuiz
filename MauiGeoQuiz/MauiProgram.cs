@@ -4,7 +4,6 @@ using MauiGeoQuiz.Core.Services;
 using MauiGeoQuiz.Game.Data;
 using MauiGeoQuiz.Game.Datasources;
 using MauiGeoQuiz.Game.Repositories;
-using MauiGeoQuiz.Game.UseCases;
 using MauiGeoQuiz.Game.ViewModels;
 using MauiGeoQuiz.MainMenu.ViewModels;
 using MauiGeoQuiz.Services;
@@ -60,7 +59,6 @@ public static class MauiProgram
     {
         builder.Services.AddScoped<ContactUsUseCase>();
         builder.Services.AddScoped<GetVersionUseCase>();
-        builder.Services.AddScoped<GetCapitalsGameUseCase>();
     }
 
     private static void SetupData(MauiAppBuilder builder)

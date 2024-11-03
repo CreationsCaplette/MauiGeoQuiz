@@ -10,6 +10,6 @@ public partial class GamePage : ReactiveContentPage<GameViewModel>
     {
         ViewModel = viewModel;
         InitializeComponent();
-        this.WhenActivated(async _ => { await viewModel.GetQuizData(); });
+        this.WhenActivated(_ => { viewModel.GetQuizData(); });
     }
 }
