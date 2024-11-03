@@ -16,12 +16,15 @@ public class CapitalGameData(IGameDataRepository updateDataRepository) : ICapita
     private IObserver<CountryCapitalQuestionModel>? _observer;
     private IEnumerable<CountryCapitalModel>? _countryData;
 
-    private List<string> _answers;
+    private List<string>? _answersHistory;
+
+    private int _questionIndex;
 
     public IDisposable Subscribe(IObserver<CountryCapitalQuestionModel> observer)
     {
         _observer = observer;
-        _answers = new List<string>();
+        _answersHistory = [];
+        _questionIndex = 0;
 
         return Observable
             .FromAsync(updateDataRepository.FetchCountryCapitalData)
@@ -34,7 +37,14 @@ public class CapitalGameData(IGameDataRepository updateDataRepository) : ICapita
     {
         if (_countryData?.Count() > 0)
         {
-            _observer?.OnNext(GetQuestion());
+            if (_questionIndex < GameConstants.NumberOfQuestions)
+            {
+                _observer?.OnNext(GetQuestion());
+            }
+            else
+            {
+                _observer?.OnCompleted();
+            }
         }
         else
         {
@@ -45,13 +55,14 @@ public class CapitalGameData(IGameDataRepository updateDataRepository) : ICapita
     private CountryCapitalQuestionModel GetQuestion()
     {
         var answer = GetAnswer();
-        _answers.Add(answer.Name);
+        _answersHistory?.Add(answer.Name);
 
         var choices = GetChoices(answer, _countryData)
                 .Randomize()
                 .ToList();
 
         return new CountryCapitalQuestionModel(
+            QuestionIndex: ++_questionIndex,
             Question: answer.Name,
             Answers: choices,
             AnswerIndex: choices.IndexOf(answer.Capital));
@@ -61,7 +72,7 @@ public class CapitalGameData(IGameDataRepository updateDataRepository) : ICapita
     {
         return _countryData
             .Randomize()
-            .Where(c => _answers.All(a => a != c.Name))
+            .Where(c => _answersHistory.All(a => a != c.Name))
             .First();
     }
 

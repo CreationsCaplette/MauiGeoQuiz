@@ -1,2 +1,6 @@
 ﻿namespace MauiGeoQuiz.Game.Models;
-public record CountryCapitalQuestionModel(string Question, IEnumerable<string> Answers, int AnswerIndex);
+public record CountryCapitalQuestionModel(
+    int QuestionIndex,
+    string Question,
+    IEnumerable<string> Answers,
+    int AnswerIndex);

@@ -15,7 +15,6 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
     private readonly ICapitalGameData _capitalGameData;
     private readonly ICountdownTimer _countdownTimer;
 
-    private int _questionIndex;
     private int _answerIndex;
 
     private IDisposable? _gameDataSubscription;
@@ -103,9 +102,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     private void DisplayQuestion(CountryCapitalQuestionModel question)
     {
-        _questionIndex++;
-
-        Progress = $"{_questionIndex + 1}/{GameConstants.NumberOfQuestions}";
+        Progress = $"{question.QuestionIndex}/{GameConstants.NumberOfQuestions}";
 
         Question = question.Question;
         AnswerOne = question.Answers.ElementAt(0);
