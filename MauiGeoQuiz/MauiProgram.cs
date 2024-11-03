@@ -1,6 +1,7 @@
 ﻿using MauiGeoQuiz.About.UseCases;
 using MauiGeoQuiz.About.ViewModels;
 using MauiGeoQuiz.Core.Services;
+using MauiGeoQuiz.Game.Data;
 using MauiGeoQuiz.Game.Datasources;
 using MauiGeoQuiz.Game.Repositories;
 using MauiGeoQuiz.Game.UseCases;
@@ -9,7 +10,6 @@ using MauiGeoQuiz.MainMenu.ViewModels;
 using MauiGeoQuiz.Services;
 using MauiGeoQuiz.ViewPages;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Handlers;
 
 namespace MauiGeoQuiz;
 public static class MauiProgram
@@ -69,6 +69,7 @@ public static class MauiProgram
         builder.Services.AddTransient<IScheduledUpdateDatasource, ScheduledUpdateDatasource>();
         builder.Services.AddTransient<ICountriesRemoteDatasource, CountriesRemoteDatasource>();
         builder.Services.AddTransient<ICountriesLocalDatasource, CountriesLocalDatasource>();
-        builder.Services.AddTransient<IUpdateDataRepository, UpdateDataRepository>();
+        builder.Services.AddTransient<IGameDataRepository, GameDataRepository>();
+        builder.Services.AddTransient<ICapitalGameData, CapitalGameData>();
     }
 }

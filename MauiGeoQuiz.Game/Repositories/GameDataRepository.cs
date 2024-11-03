@@ -4,14 +4,15 @@ using MauiGeoQuiz.Game.Datasources;
 
 namespace MauiGeoQuiz.Game.Repositories;
 
-public interface IUpdateDataRepository
+public interface IGameDataRepository
 {
     Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData();
 }
-public class UpdateDataRepository(
+
+public class GameDataRepository(
     IScheduledUpdateDatasource scheduledUpdateDatasource,
     ICountriesRemoteDatasource countriesRemoteDatasource,
-    ICountriesLocalDatasource countriesLocalDatasource) : IUpdateDataRepository
+    ICountriesLocalDatasource countriesLocalDatasource) : IGameDataRepository
 {
     public async Task<IEnumerable<CountryCapitalModel>> FetchCountryCapitalData()
     {
