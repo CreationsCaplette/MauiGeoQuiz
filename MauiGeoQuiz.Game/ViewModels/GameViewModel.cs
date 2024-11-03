@@ -123,7 +123,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         NextQuestionVisible = false;
 
         _timerSubscription = _countdownTimer
-            .GetTimerObservable(GameConstants.TimerMilliseconds)
+            .GetTimerObservable(GameConstants.QuestionTimerMilliseconds, GameConstants.QuestionTimerTick)
             .Subscribe(UpdateTimer, OnCountdownFinished);
     }
 
