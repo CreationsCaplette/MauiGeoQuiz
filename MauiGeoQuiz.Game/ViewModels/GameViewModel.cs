@@ -55,11 +55,9 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         AnswerThreeCommand = ReactiveCommand.Create(() => ValidateAnswer(2));
         AnswerFourCommand = ReactiveCommand.Create(() => ValidateAnswer(3));
         NextQuestionCommand = ReactiveCommand.Create(OnNextQuestion);
-    }
 
-    public void GetQuizData()
-    {
-        _gameDataSubscription = _capitalGameData.Subscribe(
+        _gameDataSubscription = _capitalGameData
+            .Subscribe(
             DisplayQuestion,
             () => { });
     }
