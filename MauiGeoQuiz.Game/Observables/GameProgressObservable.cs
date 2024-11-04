@@ -1,5 +1,5 @@
 ﻿using MauiGeoQuiz.Core.Constants;
-using System.Reactive.Disposables;
+using System.Reactive.Linq;
 
 namespace MauiGeoQuiz.Game.Observables;
 
@@ -18,20 +18,22 @@ public class GameProgressObservable() : IGameProgressObservable
         _observer = observer;
         _progressIndex = 0;
 
-        Advance();
-
-        return Disposable.Empty;
+        return Observable
+            .Return(GetProgressString())
+            .Subscribe(_observer);
     }
 
     public void Advance()
     {
         if (_progressIndex < GameConstants.NumberOfQuestions)
         {
-            _observer?.OnNext($"{++_progressIndex}/{GameConstants.NumberOfQuestions}");
+            _observer?.OnNext(GetProgressString());
         }
         else
         {
             _observer?.OnCompleted();
         }
     }
+
+    private string GetProgressString() => $"{++_progressIndex}/{GameConstants.NumberOfQuestions}";
 }

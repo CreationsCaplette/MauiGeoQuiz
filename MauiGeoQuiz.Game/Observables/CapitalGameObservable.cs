@@ -29,7 +29,7 @@ public class CapitalGameObservable(IGameDataRepository updateDataRepository) : I
             .FromAsync(updateDataRepository.FetchCountryCapitalData)
             .Do(data => _countryData = data.ToList())
             .Select(_ => GetQuestion())
-            .Subscribe(observer);
+            .Subscribe(_observer);
     }
 
     public void NextQuestion()

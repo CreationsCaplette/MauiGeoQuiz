@@ -12,14 +12,13 @@ namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
-
-    private readonly IGameProgressObservable _gameProgressObservable;
-    private readonly ICapitalGameObservable _capitalGameObservable;
+    private readonly IScoreObservable _scoreObservable;
     private readonly ICountdownTimer _countdownTimer;
 
     private int _answerIndex;
 
     private IDisposable? _gameProgressSubscription;
+    private IDisposable? _scoreSubscription;
     private IDisposable? _capitalGameSubscription;
     private IDisposable? _timerSubscription;
 
@@ -48,28 +47,31 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     public GameViewModel(INavigationService navigationService,
         IGameProgressObservable gameProgressObservable,
+        IScoreObservable scoreObservable,
         ICapitalGameObservable capitalGameObservable,
         ICountdownTimer countdownTimer)
     {
         _navigationService = navigationService;
-        _gameProgressObservable = gameProgressObservable;
-        _capitalGameObservable = capitalGameObservable;
+        _scoreObservable = scoreObservable;
         _countdownTimer = countdownTimer;
 
         AnswerOneCommand = ReactiveCommand.Create(() => ValidateAnswer(0));
         AnswerTwoCommand = ReactiveCommand.Create(() => ValidateAnswer(1));
         AnswerThreeCommand = ReactiveCommand.Create(() => ValidateAnswer(2));
         AnswerFourCommand = ReactiveCommand.Create(() => ValidateAnswer(3));
-        NextQuestionCommand = ReactiveCommand.Create(_gameProgressObservable.Advance);
 
-        _gameProgressSubscription = _gameProgressObservable.Subscribe(p =>
+        NextQuestionCommand = ReactiveCommand.Create(gameProgressObservable.Advance);
+
+        _gameProgressSubscription = gameProgressObservable.Subscribe(p =>
         {
             Progress = p;
-            _capitalGameObservable.NextQuestion();
+            capitalGameObservable.NextQuestion();
         },
         () => { });
 
-        _capitalGameSubscription = _capitalGameObservable.Subscribe(DisplayQuestion);
+        _scoreSubscription = _scoreObservable.Subscribe(s => Score = s);
+
+        _capitalGameSubscription = capitalGameObservable.Subscribe(DisplayQuestion);
     }
 
     private void ValidateAnswer(int guessIndex)
@@ -85,7 +87,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         var isAnswerGood = guessIndex == _answerIndex;
 
         var answerState = isAnswerGood ? GameButtonStates.Positive : GameButtonStates.Negative;
-        Score += isAnswerGood ? (int)(Timer * 10) : 0;
+        _scoreObservable.ProcessScore(isAnswerGood, Timer);
 
         switch (guessIndex)
         {
@@ -104,12 +106,6 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
         }
 
         NextQuestionVisible = true;
-    }
-
-    private void OnNextQuestion()
-    {
-        _gameProgressObservable.Advance();
-        _capitalGameObservable.NextQuestion();
     }
 
     private void DisplayQuestion(CountryCapitalQuestionModel question)
@@ -131,12 +127,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
         _timerSubscription = _countdownTimer
             .GetTimerObservable(GameConstants.QuestionTimerMilliseconds, GameConstants.QuestionTimerTick)
-            .Subscribe(UpdateTimer, OnCountdownFinished);
-    }
-
-    private void UpdateTimer(float currentSecond)
-    {
-        Timer = currentSecond;
+            .Subscribe(s => Timer = s, OnCountdownFinished);
     }
 
     private void OnCountdownFinished()

@@ -74,6 +74,7 @@ public static class MauiProgram
     private static void SetupObservables(MauiAppBuilder builder)
     {
         builder.Services.AddTransient<IGameProgressObservable, GameProgressObservable>();
+        builder.Services.AddTransient<IScoreObservable, ScoreObservable>();
         builder.Services.AddTransient<ICapitalGameObservable, CapitalGameObservable>();
     }
 }
