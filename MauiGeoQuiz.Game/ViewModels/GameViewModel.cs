@@ -12,7 +12,7 @@ namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
-    private readonly ICapitalGameData _capitalGameData;
+    private readonly ICapitalGameObservable _capitalGameData;
     private readonly ICountdownTimer _countdownTimer;
 
     private int _answerIndex;
@@ -43,7 +43,7 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     public ViewModelActivator Activator { get; } = new();
 
-    public GameViewModel(INavigationService navigationService, ICapitalGameData capitalGameData, ICountdownTimer countdownTimer)
+    public GameViewModel(INavigationService navigationService, ICapitalGameObservable capitalGameData, ICountdownTimer countdownTimer)
     {
         _navigationService = navigationService;
         _capitalGameData = capitalGameData;

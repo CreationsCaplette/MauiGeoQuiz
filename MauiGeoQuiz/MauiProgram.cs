@@ -28,6 +28,7 @@ public static class MauiProgram
         SetupPages(builder);
         SetupUseCases(builder);
         SetupData(builder);
+        SetupObservables(builder);
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -68,6 +69,10 @@ public static class MauiProgram
         builder.Services.AddTransient<ICountriesRemoteDatasource, CountriesRemoteDatasource>();
         builder.Services.AddTransient<ICountriesLocalDatasource, CountriesLocalDatasource>();
         builder.Services.AddTransient<IGameDataRepository, GameDataRepository>();
-        builder.Services.AddTransient<ICapitalGameData, CapitalGameData>();
+    }
+
+    private static void SetupObservables(MauiAppBuilder builder)
+    {
+        builder.Services.AddTransient<ICapitalGameObservable, CapitalGameObservable>();
     }
 }

@@ -6,12 +6,12 @@ using System.Reactive.Linq;
 
 namespace MauiGeoQuiz.Game.Data;
 
-public interface ICapitalGameData : IObservable<CountryCapitalQuestionModel>
+public interface ICapitalGameObservable : IObservable<CountryCapitalQuestionModel>
 {
     void TriggerNextQuestion();
 }
 
-public class CapitalGameData(IGameDataRepository updateDataRepository) : ICapitalGameData
+public class CapitalGameObservable(IGameDataRepository updateDataRepository) : ICapitalGameObservable
 {
     private IObserver<CountryCapitalQuestionModel>? _observer;
     private IEnumerable<CountryCapitalModel>? _countryData;
