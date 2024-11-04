@@ -4,11 +4,11 @@ using MauiGeoQuiz.Game.Models;
 using MauiGeoQuiz.Game.Repositories;
 using System.Reactive.Linq;
 
-namespace MauiGeoQuiz.Game.Data;
+namespace MauiGeoQuiz.Game.Observables;
 
 public interface ICapitalGameObservable : IObservable<CountryCapitalQuestionModel>
 {
-    void TriggerNextQuestion();
+    void NextQuestion();
 }
 
 public class CapitalGameObservable(IGameDataRepository updateDataRepository) : ICapitalGameObservable
@@ -24,7 +24,6 @@ public class CapitalGameObservable(IGameDataRepository updateDataRepository) : I
     {
         _observer = observer;
         _answersHistory = [];
-        _questionIndex = 0;
 
         return Observable
             .FromAsync(updateDataRepository.FetchCountryCapitalData)
@@ -33,18 +32,11 @@ public class CapitalGameObservable(IGameDataRepository updateDataRepository) : I
             .Subscribe(observer);
     }
 
-    public void TriggerNextQuestion()
+    public void NextQuestion()
     {
         if (_countryData?.Count() > 0)
         {
-            if (_questionIndex < GameConstants.NumberOfQuestions)
-            {
-                _observer?.OnNext(GetQuestion());
-            }
-            else
-            {
-                _observer?.OnCompleted();
-            }
+            _observer?.OnNext(GetQuestion());
         }
         else
         {
@@ -62,7 +54,6 @@ public class CapitalGameObservable(IGameDataRepository updateDataRepository) : I
                 .ToList();
 
         return new CountryCapitalQuestionModel(
-            QuestionIndex: ++_questionIndex,
             Question: answer.Name,
             Answers: choices,
             AnswerIndex: choices.IndexOf(answer.Capital));

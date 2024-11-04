@@ -6,18 +6,21 @@ using System.Reactive;
 using System.Reactive.Linq;
 using MauiGeoQuiz.Core.Enums;
 using MauiGeoQuiz.Core.Constants;
-using MauiGeoQuiz.Game.Data;
+using MauiGeoQuiz.Game.Observables;
 
 namespace MauiGeoQuiz.Game.ViewModels;
 public class GameViewModel : ReactiveObject, IActivatableViewModel
 {
     private readonly INavigationService _navigationService;
-    private readonly ICapitalGameObservable _capitalGameData;
+
+    private readonly IGameProgressObservable _gameProgressObservable;
+    private readonly ICapitalGameObservable _capitalGameObservable;
     private readonly ICountdownTimer _countdownTimer;
 
     private int _answerIndex;
 
-    private IDisposable? _gameDataSubscription;
+    private IDisposable? _gameProgressSubscription;
+    private IDisposable? _capitalGameSubscription;
     private IDisposable? _timerSubscription;
 
     [Reactive] public int Score { get; set; } = 0;
@@ -43,22 +46,30 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     public ViewModelActivator Activator { get; } = new();
 
-    public GameViewModel(INavigationService navigationService, ICapitalGameObservable capitalGameData, ICountdownTimer countdownTimer)
+    public GameViewModel(INavigationService navigationService,
+        IGameProgressObservable gameProgressObservable,
+        ICapitalGameObservable capitalGameObservable,
+        ICountdownTimer countdownTimer)
     {
         _navigationService = navigationService;
-        _capitalGameData = capitalGameData;
+        _gameProgressObservable = gameProgressObservable;
+        _capitalGameObservable = capitalGameObservable;
         _countdownTimer = countdownTimer;
 
         AnswerOneCommand = ReactiveCommand.Create(() => ValidateAnswer(0));
         AnswerTwoCommand = ReactiveCommand.Create(() => ValidateAnswer(1));
         AnswerThreeCommand = ReactiveCommand.Create(() => ValidateAnswer(2));
         AnswerFourCommand = ReactiveCommand.Create(() => ValidateAnswer(3));
-        NextQuestionCommand = ReactiveCommand.Create(OnNextQuestion);
+        NextQuestionCommand = ReactiveCommand.Create(_gameProgressObservable.Advance);
 
-        _gameDataSubscription = _capitalGameData
-            .Subscribe(
-            DisplayQuestion,
-            () => { });
+        _gameProgressSubscription = _gameProgressObservable.Subscribe(p =>
+        {
+            Progress = p;
+            _capitalGameObservable.NextQuestion();
+        },
+        () => { });
+
+        _capitalGameSubscription = _capitalGameObservable.Subscribe(DisplayQuestion);
     }
 
     private void ValidateAnswer(int guessIndex)
@@ -97,13 +108,12 @@ public class GameViewModel : ReactiveObject, IActivatableViewModel
 
     private void OnNextQuestion()
     {
-        _capitalGameData.TriggerNextQuestion();
+        _gameProgressObservable.Advance();
+        _capitalGameObservable.NextQuestion();
     }
 
     private void DisplayQuestion(CountryCapitalQuestionModel question)
     {
-        Progress = $"{question.QuestionIndex}/{GameConstants.NumberOfQuestions}";
-
         Question = question.Question;
         AnswerOne = question.Answers.ElementAt(0);
         AnswerTwo = question.Answers.ElementAt(1);

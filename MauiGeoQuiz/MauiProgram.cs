@@ -1,8 +1,8 @@
 ﻿using MauiGeoQuiz.About.UseCases;
 using MauiGeoQuiz.About.ViewModels;
 using MauiGeoQuiz.Core.Services;
-using MauiGeoQuiz.Game.Data;
 using MauiGeoQuiz.Game.Datasources;
+using MauiGeoQuiz.Game.Observables;
 using MauiGeoQuiz.Game.Repositories;
 using MauiGeoQuiz.Game.ViewModels;
 using MauiGeoQuiz.MainMenu.ViewModels;
@@ -73,6 +73,7 @@ public static class MauiProgram
 
     private static void SetupObservables(MauiAppBuilder builder)
     {
+        builder.Services.AddTransient<IGameProgressObservable, GameProgressObservable>();
         builder.Services.AddTransient<ICapitalGameObservable, CapitalGameObservable>();
     }
 }
