@@ -7,7 +7,9 @@
     xmlns:strings="clr-namespace:MauiGeoQuiz.Resources.Strings"
     x:TypeArguments="vm:AboutViewModel"
     x:DataType="vm:AboutViewModel"
-    x:Class="MauiGeoQuiz.ViewPages.AboutPage">
+    x:Class="MauiGeoQuiz.ViewPages.AboutPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource Background}">
 
     <ScrollView>
 

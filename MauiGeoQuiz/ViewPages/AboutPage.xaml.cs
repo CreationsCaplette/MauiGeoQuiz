@@ -1,5 +1,4 @@
 using MauiGeoQuiz.About.ViewModels;
-using ReactiveUI;
 using ReactiveUI.Maui;
 
 namespace MauiGeoQuiz.ViewPages;
@@ -10,6 +9,5 @@ public partial class AboutPage : ReactiveContentPage<AboutViewModel>
     {
         ViewModel = viewModel;
         InitializeComponent();
-        this.WhenActivated(_ => { });
     }
 }
