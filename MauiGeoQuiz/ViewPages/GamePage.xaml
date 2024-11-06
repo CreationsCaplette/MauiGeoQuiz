@@ -83,11 +83,24 @@
                 IsEnabled="{Binding AnswersEnabled}"
                 Command="{Binding AnswerFourCommand}"/>
 
-            <Button
-                Style="{StaticResource TextButton}"
-                Text="{x:Static strings:Strings.NextQuestion}"
-                IsVisible="{Binding NextQuestionVisible}"
-                Command="{Binding NextQuestionCommand}"/>
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                IsVisible="{Binding NextQuestionVisible}">
+
+                <Button
+                    Style="{StaticResource TextButton}"
+                    MinimumWidthRequest="0"
+                    Text="{x:Static strings:Strings.NextQuestion}"
+                    Command="{Binding NextQuestionCommand}"/>
+
+                <ImageButton
+                    BackgroundColor="{StaticResource Background}"
+                    Source="arrow.png"
+                    SemanticProperties.Description="Arrow image"
+                    HeightRequest="16"
+                    Command="{Binding NextQuestionCommand}"/>
+
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
 
